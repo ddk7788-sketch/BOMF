@@ -15,7 +15,6 @@ function setPhotoPlaceholder(label, text) {
 const homePhotos = {
   landing: {
     src: "assets/bomkkot-landing-flower.png",
-    animatedSrc: "assets/bomkkot-landing-animation.webp",
     alt: "따뜻한 빛을 받은 흰 꽃과 한방 재료, 차가 놓인 이미지",
     placeholder: "대표 이미지 준비 중",
     caption: "",
@@ -72,18 +71,7 @@ Object.entries(homePhotos).forEach(([slot, photo]) => {
         label.hidden = false;
       }
     }, { once: true });
-    if (photo.animatedSrc) {
-      const picture = document.createElement("picture");
-      const animation = document.createElement("source");
-      picture.className = "home-photo-picture";
-      animation.type = "image/webp";
-      animation.srcset = photo.animatedSrc;
-      animation.media = "(prefers-reduced-motion: no-preference)";
-      picture.append(animation, image);
-      frame.prepend(picture);
-    } else {
-      frame.prepend(image);
-    }
+    frame.prepend(image);
     frame.classList.add("has-photo");
     if (label) label.hidden = true;
   } else {
