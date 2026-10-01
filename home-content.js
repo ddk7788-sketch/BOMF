@@ -14,7 +14,9 @@ function setPhotoPlaceholder(label, text) {
 
 const homePhotos = {
   landing: {
-    src: "assets/bomkkot-landing-flower.png",
+    src: "assets/bomkkot-landing-background.jpg",
+    fallbackSrc: "assets/bomkkot-landing-flower.png",
+    flowerLayerSrc: "assets/bomkkot-landing-flower-layer.webp",
     alt: "따뜻한 빛을 받은 흰 꽃과 한방 재료, 차가 놓인 이미지",
     placeholder: "대표 이미지 준비 중",
     caption: "",
@@ -63,6 +65,13 @@ Object.entries(homePhotos).forEach(([slot, photo]) => {
     image.loading = slot === "hero" || slot === "landing" ? "eager" : "lazy";
     image.decoding = "async";
     image.addEventListener("error", () => {
+      const flowerLayer = frame.querySelector(".landing-flower-layer");
+      if (flowerLayer) flowerLayer.remove();
+      if (photo.fallbackSrc && image.dataset.fallbackAttempted !== "true") {
+        image.dataset.fallbackAttempted = "true";
+        image.src = photo.fallbackSrc;
+        return;
+      }
       image.remove();
       frame.classList.remove("has-photo");
       frame.classList.add("is-placeholder");
@@ -70,8 +79,22 @@ Object.entries(homePhotos).forEach(([slot, photo]) => {
         setPhotoPlaceholder(label, "사진을 불러오지 못했습니다");
         label.hidden = false;
       }
-    }, { once: true });
+    });
     frame.prepend(image);
+    if (photo.flowerLayerSrc) {
+      const flowerLayer = new Image();
+      flowerLayer.className = "landing-flower-layer";
+      flowerLayer.src = photo.flowerLayerSrc;
+      flowerLayer.alt = "";
+      flowerLayer.setAttribute("aria-hidden", "true");
+      flowerLayer.loading = "eager";
+      flowerLayer.decoding = "async";
+      flowerLayer.addEventListener("error", () => {
+        flowerLayer.remove();
+        if (photo.fallbackSrc) image.src = photo.fallbackSrc;
+      }, { once: true });
+      frame.append(flowerLayer);
+    }
     frame.classList.add("has-photo");
     if (label) label.hidden = true;
   } else {
