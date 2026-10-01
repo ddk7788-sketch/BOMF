@@ -68,6 +68,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .landing-card { position: relative; isolation: isolate; width: 100%; height: calc(100vh - 76px); height: calc(100svh - 76px); min-height: 0; margin: 0; overflow: hidden; background: #d4d4d1; color: var(--brand-deep); scroll-margin-top: 76px; }
 .landing-card-photo { position: absolute; z-index: -1; inset: 0; width: 100%; height: 100%; border-radius: 0; }
 .landing-card-photo::before { display: none !important; }
+.landing-card-photo.has-photo .home-photo-image { transform-origin: 53% 72%; animation: landing-flower-sway 5.8s ease-in-out infinite; }
+@keyframes landing-flower-sway { 0%, 100% { transform: scale(1.025) rotate(-.55deg); } 50% { transform: scale(1.025) rotate(.55deg); } }
 .landing-card-link { position: absolute; z-index: 1; bottom: clamp(18px, 3vh, 32px); left: 50%; min-height: 48px; padding: 0 20px; display: inline-flex; align-items: center; gap: 12px; transform: translateX(-50%); border: 1px solid rgb(66 53 42 / .28); border-radius: 24px; background: rgb(245 239 228 / .94); color: var(--brand-deep); font-size: 14px; font-weight: 650; white-space: nowrap; transition: background-color 160ms ease, transform 160ms ease; }
 .landing-card-link:hover { background: var(--surface); transform: translate(-50%, -1px); }
 .landing-card-link span { font-size: 17px; }
@@ -480,6 +482,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+  .landing-card-photo.has-photo .home-photo-image { animation: none; transform: none; }
   .clinic-gallery-photo:hover, .clinic-gallery-photo:focus-visible { transform: none; }
   .clinic-gallery-photo:hover .home-photo-image, .clinic-gallery-photo:focus-visible .home-photo-image { transform: none; }
   .testimonials-columns { max-height: none; overflow: visible; mask-image: none; }
