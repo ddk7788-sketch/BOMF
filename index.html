@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ebe1d0" />
+    <meta name="description" content="봄꽃한의원 진료 안내와 병원 소개" />
+    <title>봄꽃한의원 — 몸의 이야기를 듣는 진료</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,500,0,0" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="home-content.js" defer></script>
+    <script src="app.js" defer></script>
+    <script src="constitution-quiz.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 바로가기</a>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="wordmark" href="#top" aria-label="봄꽃한의원 홈"><img src="assets/bomkkot-wordmark.png" alt="봄꽃한의원" /></a>
+        <a class="clinic-hours" href="#visit"><span class="hours-mark" aria-hidden="true"></span><span><strong>방문 안내</strong><small>운영 정보 준비 중</small></span></a>
+        <nav class="main-nav" aria-label="주 메뉴">
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="treatmentMenu">진료 <span class="chevron" aria-hidden="true"></span></button>
+            <div class="dropdown-menu" id="treatmentMenu" hidden><a href="care/pain.html">통증</a><a href="care/refractory.html">난치</a><a href="care/infertility.html">난임</a><a href="care/weight.html">다이어트</a><a href="care/skin.html">피부</a></div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="careMenu">의료진 <span class="chevron" aria-hidden="true"></span></button>
+            <div class="dropdown-menu" id="careMenu" hidden><a href="#doctors">의료진 소개</a><a href="#promise">진료 원칙</a></div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="guideMenu">안내 <span class="chevron" aria-hidden="true"></span></button>
+            <div class="dropdown-menu" id="guideMenu" hidden><a href="#visit">진료시간·오시는 길</a><a href="#faq">자주 묻는 질문</a></div>
+          </div>
+          <div class="nav-dropdown">
+            <button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="storyMenu">봄꽃 이야기 <span class="chevron" aria-hidden="true"></span></button>
+            <div class="dropdown-menu" id="storyMenu" hidden><a href="#story">병원 소개</a><a href="#notice">소식과 안내</a></div>
+          </div>
+        </nav>
+        <div class="header-actions">
+          <a class="button button-soft quiz-button" href="#constitution-quiz">체질 테스트</a>
+          <button class="search-button" type="button" aria-label="홈페이지 검색" data-open-dialog="searchDialog"><span class="material-symbols-outlined" aria-hidden="true">search</span></button>
+          <button class="button button-dark appointment-button" type="button" data-open-dialog="appointmentDialog">진료 예약</button>
+        </div>
+        <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">메뉴</button>
+      </div>
+      <div class="mobile-menu" id="mobileMenu" hidden>
+        <a href="#services">진료 분야</a><a href="care/pain.html">통증</a><a href="care/refractory.html">난치</a><a href="care/infertility.html">난임</a><a href="care/weight.html">다이어트</a><a href="care/skin.html">피부</a><a href="#doctors">의료진 소개</a><a href="#visit">이용 안내</a><a href="#story">봄꽃 이야기</a>
+        <a href="#constitution-quiz">체질 테스트</a><button type="button" data-open-dialog="searchDialog">검색</button><button type="button" data-open-dialog="appointmentDialog">진료 예약</button>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="landing-card" id="top" aria-label="봄꽃한의원 소개">
+        <figure class="home-photo-slot landing-card-photo" data-home-photo="landing" aria-label="봄꽃한의원 소개 이미지">
+          <span class="photo-placeholder-label" data-home-photo-label>대표 이미지 준비 중</span>
+        </figure>
+        <div class="landing-card-topline"><span>봄꽃한의원</span><span>한방 진료 안내</span></div>
+        <div class="landing-card-message" aria-label="몸의 이야기를 듣고, 다시 피어나는 봄을 함께합니다">
+          <p>몸의 이야기를 듣고</p>
+          <p>다시 피어나는 봄을 함께</p>
+        </div>
+        <a class="landing-card-link" href="#welcome">봄꽃한의원 진료 안내 <span aria-hidden="true">↓</span></a>
+      </section>
+
+      <section class="hero section-wrap" id="welcome" aria-labelledby="heroTitle">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-rule"></span> 봄꽃한의원의 진료 철학</p>
+          <h1 id="heroTitle">먼저 충분히 듣고,<br /><span>알기 쉽게 설명합니다.</span></h1>
+          <p class="hero-description">불편한 곳과 생활의 맥락을 함께 살펴, 환자 한 분 한 분이 이해할 수 있는 말로 진료 방향을 안내합니다.</p>
+          <p class="hero-note">막연한 걱정보다 현재 상태와 선택할 수 있는 다음 단계를 먼저 나눕니다.</p>
+          <nav class="hero-specialties" aria-label="주요 진료 분야">
+            <a href="care/pain.html">통증</a><a href="care/refractory.html">난치</a><a href="care/infertility.html">난임</a><a href="care/weight.html">다이어트</a><a href="care/skin.html">피부</a>
+          </nav>
+          <div class="hero-actions"><a class="button button-dark" href="#services">진료 분야 보기 <span aria-hidden="true">↗</span></a><button class="button button-outline" type="button" data-open-dialog="appointmentDialog">진료 예약 문의</button></div>
+        </div>
+        <figure class="home-photo-slot hero-photo-slot" data-home-photo="hero" aria-label="홈 화면 병원 사진">
+          <span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span>
+          <figcaption data-home-photo-caption>실제 봄꽃한의원 사진으로 교체해 주세요.</figcaption>
+        </figure>
+      </section>
+
+      <section class="philosophy-feature section-wrap" id="mission" aria-labelledby="missionTitle">
+        <figure class="home-photo-slot philosophy-photo-slot" data-home-photo="philosophy" aria-label="봄꽃의 의미를 담은 사진">
+          <span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span>
+          <figcaption data-home-photo-caption>봄꽃의 이야기를 담을 사진으로 교체해 주세요.</figcaption>
+        </figure>
+        <div class="philosophy-copy">
+          <p class="eyebrow">THE MEANING OF BOMKKOT</p>
+          <h2 id="missionTitle">긴 겨울을 지나,<br /><span>각자의 꽃이 피는 봄으로.</span></h2>
+          <p>‘봄꽃’이라는 이름에는 추운 계절이 지나고 다시 봄이 찾아와 마침내 꽃이 피어나는 이야기를 담았습니다.</p>
+          <p>회복의 시간과 모습은 사람마다 다릅니다. 봄꽃한의원은 각자의 시간을 존중하며, 불편한 곳과 생활의 이야기를 충분히 듣고 이해하기 쉬운 말로 진료의 다음 단계를 함께 나누겠습니다.</p>
+          <a class="text-link" href="#process">처음 방문 과정을 살펴보세요 <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+
+      <section class="promise-strip" id="promise" aria-label="봄꽃한의원의 진료 약속">
+        <div class="promise-inner"><p>충분히 듣고</p><span aria-hidden="true"></span><p>쉽게 설명하고</p><span aria-hidden="true"></span><p>함께 계획합니다</p></div>
+      </section>
+
+      <section class="services-section" id="services" aria-labelledby="servicesTitle">
+        <div class="section-wrap">
+          <div class="section-heading"><div><p class="eyebrow">CARE AT BOMKKOT</p><h2 id="servicesTitle">다섯 분야를 깊이 있게,<br />한 분 한 분은 세심하게.</h2><p class="section-intro">통증·난치·난임·다이어트·피부를 중심으로, 현재 상태를 살펴 진료 방향을 안내합니다.</p></div><a class="text-link" href="#visit">진료 문의하기 <span aria-hidden="true">↗</span></a></div>
+          <div class="service-grid">
+            <article class="service-card"><p class="service-type">01 · 통증</p><span class="material-symbols-outlined service-icon" aria-hidden="true">accessibility_new</span><h3>통증에 대한<br />진료 안내</h3><p>불편한 부위와 기간, 일상에 미치는 영향을 살펴 진료 방향을 안내합니다.</p><a href="care/pain.html">자세히 보기 <span aria-hidden="true">↗</span></a></article>
+            <article class="service-card"><p class="service-type">02 · 난치</p><span class="material-symbols-outlined service-icon" aria-hidden="true">health_and_safety</span><h3>오래 이어진 증상<br />상담 안내</h3><p>이전 진료와 현재 상태를 확인하고 필요한 상담 내용을 함께 살펴봅니다.</p><a href="care/refractory.html">자세히 보기 <span aria-hidden="true">↗</span></a></article>
+            <article class="service-card"><p class="service-type">03 · 난임</p><span class="material-symbols-outlined service-icon" aria-hidden="true">family_restroom</span><h3>난임 관련<br />상담 안내</h3><p>개인별 건강 상태와 기존 진료 내용을 확인하는 상담 과정을 안내합니다.</p><a href="care/infertility.html">자세히 보기 <span aria-hidden="true">↗</span></a></article>
+            <article class="service-card"><p class="service-type">04 · 다이어트</p><span class="material-symbols-outlined service-icon" aria-hidden="true">monitor_weight</span><h3>체중 관리<br />상담 안내</h3><p>생활 습관과 건강 상태를 살펴 지속 가능한 관리 방향을 상담합니다.</p><a href="care/weight.html">자세히 보기 <span aria-hidden="true">↗</span></a></article>
+            <article class="service-card"><p class="service-type">05 · 피부</p><span class="material-symbols-outlined service-icon" aria-hidden="true">face_3</span><h3>피부 증상<br />상담 안내</h3><p>불편한 증상과 지속 기간, 기존 관리 내용을 확인하고 안내합니다.</p><a href="care/skin.html">자세히 보기 <span aria-hidden="true">↗</span></a></article>
+          </div>
+          <aside class="other-care" aria-labelledby="otherCareTitle"><div><p class="eyebrow">OTHER CARE</p><h3 id="otherCareTitle">그 밖의 불편도 편하게 문의해 주세요</h3><p>대표 진료 분야 외의 불편도 병원의 진료 범위를 확인해 차분히 안내해 드립니다.</p></div><button class="button button-outline" type="button" data-open-dialog="appointmentDialog">진료 문의하기 <span aria-hidden="true">↗</span></button></aside>
+          <p class="medical-note">진료 분야별 자세한 내용은 병원 확인 후 확정해 주세요. 개인의 상태와 진료 결과는 다를 수 있으며, 구체적인 진료 방법과 비용은 의료진 상담을 통해 안내합니다.</p>
+        </div>
+      </section>
+
+      <section class="doctors-section section-wrap" id="doctors" aria-labelledby="doctorsTitle">
+          <div class="doctor-copy"><p class="eyebrow">MEET THE DIRECTOR</p><h2 id="doctorsTitle">한 사람의 상태를<br />세심하게 살피는 진료진</h2>
+          <div class="director-profile" id="director-profile"><span class="doctor-label">대표원장</span><h3>원장 프로필</h3><p class="doctor-credentials">성함과 확인된 약력을 준비하고 있습니다.</p><p class="director-bio">불편한 곳과 생활의 맥락을 충분히 듣고, 환자 한 분 한 분이 이해할 수 있는 말로 진료 방향을 안내합니다.</p></div>
+          <div class="doctor-links"><a class="text-link" href="#director-profile">대표원장 프로필 보기 <span aria-hidden="true">↗</span></a><a class="text-link" href="doctors.html">다른 의료진 보기 <span aria-hidden="true">↗</span></a></div>
+        </div>
+        <figure class="home-photo-slot doctor-photo-slot" data-home-photo="director" aria-label="봄꽃한의원 대표원장 사진"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>대표원장 프로필 사진으로 교체해 주세요.</figcaption></figure>
+      </section>
+
+
+      <section class="process-section" id="process" aria-labelledby="processTitle">
+        <div class="section-wrap"><div class="section-heading process-heading"><div><p class="eyebrow">YOUR FIRST VISIT</p><h2 id="processTitle">처음 오신 순간부터 <span>치료 이후까지</span></h2><p class="section-intro">처음 문의부터 진료 후 관리까지, 방문 전 흐름을 미리 살펴보세요.</p></div></div>
+          <ol class="journey-list">
+            <li class="journey-step"><span class="journey-number">01</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">call</span><h3>문의 · 예약</h3><p>전화나 예약 문의로 진료 가능 시간과 방문 방법을 확인합니다.</p></li>
+            <li class="journey-step"><span class="journey-number">02</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">forum</span><h3>상담 · 접수</h3><p>불편한 점과 생활 습관, 복용 중인 약 등을 확인합니다.</p></li>
+            <li class="journey-step"><span class="journey-number">03</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">stethoscope</span><h3>진료 · 설명</h3><p>현재 상태를 살펴 진료 방향과 예상 과정, 비용을 안내합니다.</p></li>
+            <li class="journey-step"><span class="journey-number">04</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">medication</span><h3>치료 · 관리</h3><p>동의한 진료 계획에 따라 진행하고 필요한 관리 내용을 안내합니다.</p></li>
+            <li class="journey-step"><span class="journey-number">05</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">monitor_heart</span><h3>이후 관리</h3><p>경과를 살피며 다음 진료나 생활 관리 방향을 함께 확인합니다.</p></li>
+          </ol>
+          <p class="journey-note">진료 과정과 내용은 개인의 상태와 병원 운영 방식에 따라 달라질 수 있습니다.</p>
+          <div class="journey-action"><button class="button button-dark" type="button" data-open-dialog="appointmentDialog"><span class="material-symbols-outlined" aria-hidden="true">event_available</span> 첫 단계 시작하기</button></div>
+        </div>
+      </section>
+
+      <section class="clinic-gallery section-wrap" id="clinic-gallery" aria-labelledby="clinicGalleryTitle">
+        <div class="section-heading gallery-heading"><div><p class="eyebrow">봄꽃한의원 공간</p><h2 id="clinicGalleryTitle">편안한 진료가 시작되는 곳</h2><p class="section-intro">따뜻한 상담 공간부터 진료실까지, 내부를 사진으로 둘러보세요. 사진을 누르면 크게 볼 수 있습니다.</p></div></div>
+        <div class="clinic-gallery-grid" aria-label="봄꽃한의원 내부 공간 사진">
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-01" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 01 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 01</figcaption></figure>
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-02" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 02 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 02</figcaption></figure>
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-03" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 03 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 03</figcaption></figure>
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-04" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 04 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 04</figcaption></figure>
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-05" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 05 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 05</figcaption></figure>
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-06" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 06 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 06</figcaption></figure>
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-07" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 07 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 07</figcaption></figure>
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-08" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 08 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 08</figcaption></figure>
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-09" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 09 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 09</figcaption></figure>
+          <figure class="home-photo-slot clinic-gallery-photo" data-home-photo="clinic-10" tabindex="0" role="button" aria-haspopup="dialog" aria-label="봄꽃한의원 내부 공간 사진 10 크게 보기"><span class="photo-placeholder-label" data-home-photo-label>사진 준비 중</span><figcaption data-home-photo-caption>공간 사진 10</figcaption></figure>
+        </div>
+      </section>
+
+      <dialog class="clinic-photo-dialog" id="clinicPhotoDialog" aria-labelledby="clinicPhotoDialogTitle" aria-describedby="clinicPhotoDialogCaption">
+        <h2 class="sr-only" id="clinicPhotoDialogTitle">봄꽃한의원 내부 공간 사진</h2>
+        <button class="close-button clinic-photo-close" type="button" data-close-dialog aria-label="사진 크게 보기 닫기">닫기</button>
+        <div class="clinic-photo-dialog-frame" data-clinic-photo-preview></div>
+        <p class="clinic-photo-dialog-caption" id="clinicPhotoDialogCaption"></p>
+      </dialog>
+
+      <section class="treatments-preview" id="all-treatments" aria-labelledby="treatmentsTitle">
+        <div class="section-wrap treatments-layout">
+          <div class="treatments-heading"><p class="eyebrow">CARE FOR EVERY DAY</p><h2 id="treatmentsTitle">온 가족의 건강을<br /><span>한 곳에서 살핍니다.</span></h2><p>봄꽃한의원은 현재 다섯 진료 분야를 중심으로 안내하고 있습니다. 전체 진료 항목은 확인된 정보에 맞춰 차례로 소개하겠습니다.</p></div>
+          <div class="treatments-list-wrap"><p class="treatments-list-label">현재 안내 중인 진료</p><nav class="treatments-list" aria-label="현재 안내 중인 진료">
+            <a href="care/pain.html"><span>통증</span><span aria-hidden="true">↗</span></a><a href="care/refractory.html"><span>난치</span><span aria-hidden="true">↗</span></a><a href="care/infertility.html"><span>난임</span><span aria-hidden="true">↗</span></a><a href="care/weight.html"><span>다이어트</span><span aria-hidden="true">↗</span></a><a href="care/skin.html"><span>피부</span><span aria-hidden="true">↗</span></a>
+          </nav><p class="treatments-footnote">그 밖의 진료는 방문 안내를 통해 문의해 주세요.</p><a class="text-link" href="#visit">진료 문의 방법 보기 <span aria-hidden="true">↗</span></a></div>
+        </div>
+      </section>
+
+      <section class="constitution-section" id="constitution-quiz" aria-labelledby="constitutionTitle">
+        <div class="section-wrap constitution-layout">
+          <div class="constitution-intro">
+            <p class="eyebrow">SASANG CONSTITUTION CHECK</p>
+            <h2 id="constitutionTitle">나와 가까운 사상체질을<br /><span>간단히 알아보세요.</span></h2>
+            <p>몇 가지 성향 질문에 답하면 태양인·태음인·소양인·소음인 가운데 응답과 가까운 유형을 참고용으로 보여드립니다.</p>
+            <div class="constitution-note"><span class="material-symbols-outlined" aria-hidden="true">info</span><span>간단한 웹 체크는 체질 진단이 아닙니다. 답변은 저장되거나 전송되지 않습니다.</span></div>
+          </div>
+          <div class="constitution-card" data-quiz>
+            <div class="quiz-progress-row"><span class="quiz-progress-label" data-progress-label>질문 1 / 5</span><span class="quiz-progress-track" aria-hidden="true"><span data-progress-bar></span></span></div>
+            <div class="quiz-stage" data-quiz-stage aria-live="polite"></div>
+            <div class="quiz-controls" data-quiz-controls><button class="button button-outline" type="button" data-quiz-back disabled>이전</button><button class="button button-dark" type="button" data-quiz-next disabled>다음 질문 <span aria-hidden="true">→</span></button></div>
+            <div class="quiz-result" data-quiz-result hidden aria-live="polite"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq-section section-wrap" id="faq" aria-labelledby="faqTitle">
+        <div class="faq-intro"><p class="eyebrow">FAQ · 방문 전 안내</p><h2 id="faqTitle">자주 묻는 질문,<br />먼저 확인해 보세요</h2><p>방문 전에 자주 궁금해하시는 내용을 모았습니다. 아래 답변은 임시 안내 문구입니다.</p></div>
+        <div class="faq-cards">
+          <article class="faq-card"><p class="faq-card-label"><span>01</span> 방문 안내</p><h3>예약 없이 방문해도 되나요?</h3><p>진료 가능 여부와 대기 상황은 달라질 수 있어, 방문 전 병원에 확인해 주세요.</p></article>
+          <article class="faq-card"><p class="faq-card-label"><span>02</span> 첫 방문</p><h3>첫 방문 때 준비할 것이 있나요?</h3><p>복용 중인 약이나 이전 검사 자료가 있다면 상담 때 참고할 수 있도록 준비해 주세요.</p></article>
+          <article class="faq-card"><p class="faq-card-label"><span>03</span> 진료 비용</p><h3>진료 비용은 어떻게 알 수 있나요?</h3><p>진료 항목과 개인 상태에 따라 달라질 수 있으니, 진료 전에 문의해 주세요.</p></article>
+        </div>
+      </section>
+
+      <section class="testimonials-section" id="reviews" aria-labelledby="reviewsTitle">
+        <div class="section-wrap">
+          <div class="testimonials-heading">
+            <p class="eyebrow">BOMKKOT VISITORS</p>
+            <h2 id="reviewsTitle">봄꽃을 찾은 분들의 이야기</h2>
+            <p>실제 방문 후기는 공개 동의를 확인한 내용으로 소개하겠습니다.</p>
+          </div>
+          <div class="testimonials-columns" aria-label="실제 후기 등록 준비 중">
+            <div class="testimonials-column" style="--review-speed: 32s">
+              <div class="testimonials-track">
+                <article class="testimonial-card"><span class="testimonial-avatar" aria-hidden="true"></span><p class="testimonial-placeholder">실제 후기 내용을<br />확인 후 등록할 예정입니다.</p><div class="testimonial-author"><strong>후기 01</strong><span>공개 동의 확인 후 소개</span></div></article>
+                <article class="testimonial-card"><span class="testimonial-avatar" aria-hidden="true"></span><p class="testimonial-placeholder">환자분의 경험을<br />있는 그대로 전하겠습니다.</p><div class="testimonial-author"><strong>후기 02</strong><span>공개 동의 확인 후 소개</span></div></article>
+                <article class="testimonial-card"><span class="testimonial-avatar" aria-hidden="true"></span><p class="testimonial-placeholder">후기 등록을<br />준비하고 있습니다.</p><div class="testimonial-author"><strong>후기 03</strong><span>공개 동의 확인 후 소개</span></div></article>
+                <div class="testimonial-duplicate" aria-hidden="true">
+                  <article class="testimonial-card"><span class="testimonial-avatar"></span><p class="testimonial-placeholder">실제 후기 내용을<br />확인 후 등록할 예정입니다.</p><div class="testimonial-author"><strong>후기 01</strong><span>공개 동의 확인 후 소개</span></div></article>
+                  <article class="testimonial-card"><span class="testimonial-avatar"></span><p class="testimonial-placeholder">환자분의 경험을<br />있는 그대로 전하겠습니다.</p><div class="testimonial-author"><strong>후기 02</strong><span>공개 동의 확인 후 소개</span></div></article>
+                  <article class="testimonial-card"><span class="testimonial-avatar"></span><p class="testimonial-placeholder">후기 등록을<br />준비하고 있습니다.</p><div class="testimonial-author"><strong>후기 03</strong><span>공개 동의 확인 후 소개</span></div></article>
+                </div>
+              </div>
+            </div>
+            <div class="testimonials-column testimonials-column-offset" style="--review-speed: 39s">
+              <div class="testimonials-track">
+                <article class="testimonial-card"><span class="testimonial-avatar" aria-hidden="true"></span><p class="testimonial-placeholder">상담 경험에 관한<br />후기를 준비 중입니다.</p><div class="testimonial-author"><strong>후기 04</strong><span>공개 동의 확인 후 소개</span></div></article>
+                <article class="testimonial-card"><span class="testimonial-avatar" aria-hidden="true"></span><p class="testimonial-placeholder">확인된 방문 후기를<br />차례로 소개하겠습니다.</p><div class="testimonial-author"><strong>후기 05</strong><span>공개 동의 확인 후 소개</span></div></article>
+                <article class="testimonial-card"><span class="testimonial-avatar" aria-hidden="true"></span><p class="testimonial-placeholder">실제 후기 게시를<br />준비하고 있습니다.</p><div class="testimonial-author"><strong>후기 06</strong><span>공개 동의 확인 후 소개</span></div></article>
+                <div class="testimonial-duplicate" aria-hidden="true">
+                  <article class="testimonial-card"><span class="testimonial-avatar"></span><p class="testimonial-placeholder">상담 경험에 관한<br />후기를 준비 중입니다.</p><div class="testimonial-author"><strong>후기 04</strong><span>공개 동의 확인 후 소개</span></div></article>
+                  <article class="testimonial-card"><span class="testimonial-avatar"></span><p class="testimonial-placeholder">확인된 방문 후기를<br />차례로 소개하겠습니다.</p><div class="testimonial-author"><strong>후기 05</strong><span>공개 동의 확인 후 소개</span></div></article>
+                  <article class="testimonial-card"><span class="testimonial-avatar"></span><p class="testimonial-placeholder">실제 후기 게시를<br />준비하고 있습니다.</p><div class="testimonial-author"><strong>후기 06</strong><span>공개 동의 확인 후 소개</span></div></article>
+                </div>
+              </div>
+            </div>
+            <div class="testimonials-column testimonials-column-third" style="--review-speed: 35s">
+              <div class="testimonials-track">
+                <article class="testimonial-card"><span class="testimonial-avatar" aria-hidden="true"></span><p class="testimonial-placeholder">개인정보를 보호하며<br />후기를 소개하겠습니다.</p><div class="testimonial-author"><strong>후기 07</strong><span>공개 동의 확인 후 소개</span></div></article>
+                <article class="testimonial-card"><span class="testimonial-avatar" aria-hidden="true"></span><p class="testimonial-placeholder">확인된 의견만<br />게시하겠습니다.</p><div class="testimonial-author"><strong>후기 08</strong><span>공개 동의 확인 후 소개</span></div></article>
+                <article class="testimonial-card"><span class="testimonial-avatar" aria-hidden="true"></span><p class="testimonial-placeholder">후기 내용을<br />준비하고 있습니다.</p><div class="testimonial-author"><strong>후기 09</strong><span>공개 동의 확인 후 소개</span></div></article>
+                <div class="testimonial-duplicate" aria-hidden="true">
+                  <article class="testimonial-card"><span class="testimonial-avatar"></span><p class="testimonial-placeholder">개인정보를 보호하며<br />후기를 소개하겠습니다.</p><div class="testimonial-author"><strong>후기 07</strong><span>공개 동의 확인 후 소개</span></div></article>
+                  <article class="testimonial-card"><span class="testimonial-avatar"></span><p class="testimonial-placeholder">확인된 의견만<br />게시하겠습니다.</p><div class="testimonial-author"><strong>후기 08</strong><span>공개 동의 확인 후 소개</span></div></article>
+                  <article class="testimonial-card"><span class="testimonial-avatar"></span><p class="testimonial-placeholder">후기 내용을<br />준비하고 있습니다.</p><div class="testimonial-author"><strong>후기 09</strong><span>공개 동의 확인 후 소개</span></div></article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="story-section section-wrap" id="story" aria-labelledby="storyTitle">
+        <div class="story-mark"><img src="assets/bomkkot-wordmark.png" alt="봄꽃한의원" /></div>
+        <div class="story-copy"><p class="eyebrow">ABOUT BOMKKOT</p><h2 id="storyTitle">편안하게 묻고,<br />분명하게 이해하는 진료</h2><p>봄꽃한의원은 환자가 자신의 상태와 진료 과정을 충분히 이해할 수 있도록 쉬운 설명과 차분한 상담을 중요하게 생각합니다.</p><a class="text-link" href="#mission">봄꽃의 진료 원칙 <span aria-hidden="true">↗</span></a></div>
+      </section>
+
+      <section class="visit-section" id="visit" aria-labelledby="visitTitle">
+        <div class="section-wrap visit-inner"><div><p class="eyebrow">VISIT BOMKKOT</p><h2 id="visitTitle">방문 안내</h2><p class="section-intro">진료시간과 위치 등 정확한 방문 정보를 확인해 안내하겠습니다.</p></div><div class="visit-details"><div><span>진료시간</span><strong>안내 준비 중</strong></div><div><span>주소</span><strong>안내 준비 중</strong></div><div><span>대표 전화</span><strong>안내 준비 중</strong></div><button class="button button-dark" type="button" data-open-dialog="appointmentDialog">방문 문의하기 <span aria-hidden="true">↗</span></button></div></div>
+      </section>
+
+      <section class="notice-bar" id="notice"><div class="section-wrap notice-inner"><p><strong>진료 안내</strong><span>의료 정보는 일반적인 안내이며, 정확한 진단과 치료는 의료진과 상담해 주세요.</span></p><a href="#visit">병원 이용 안내 <span aria-hidden="true">↗</span></a></div></section>
+    </main>
+
+    <footer class="site-footer"><div class="section-wrap footer-inner"><div><a class="wordmark footer-wordmark" href="#top"><img src="assets/bomkkot-wordmark.png" alt="봄꽃한의원" /></a><p>환자가 이해하고 선택할 수 있는 진료를 지향합니다.</p></div><div class="footer-info"><span>주소: 안내 준비 중</span><span>대표 전화: 안내 준비 중</span><span>진료시간: 안내 준비 중</span></div><div class="footer-links"><span>개인정보 처리방침 준비 중</span><span>이용약관 준비 중</span><a href="#top">맨 위로 ↑</a></div><small>© 봄꽃한의원. All rights reserved.</small></div></footer>
+
+    <dialog class="modal" id="appointmentDialog" aria-labelledby="appointmentTitle">
+      <form class="modal-card" id="appointmentForm" method="dialog">
+        <div class="modal-heading"><div><p class="eyebrow">APPOINTMENT INQUIRY</p><h2 id="appointmentTitle">진료 예약 문의</h2></div><button class="close-button" type="button" data-close-dialog aria-label="닫기">닫기</button></div>
+        <p class="modal-intro">정적 화면 미리보기입니다. 실제 예약은 전화 문의로 확인해 주세요.</p>
+        <label class="field-label" for="visitorName">성함</label><input class="field-input" id="visitorName" name="name" autocomplete="name" required placeholder="성함을 입력해 주세요" />
+        <label class="field-label" for="visitorContact">연락처</label><input class="field-input" id="visitorContact" name="contact" autocomplete="tel" required placeholder="연락 가능한 번호를 입력해 주세요" />
+        <label class="field-label" for="visitTime">희망 시간대</label><select class="field-input" id="visitTime" name="time"><option>시간을 선택해 주세요</option><option>오전</option><option>오후</option><option>병원과 상의</option></select>
+        <label class="consent-label"><input type="checkbox" required /> <span>예약 문의를 위한 개인정보 수집 및 이용에 동의합니다. (데모 화면이며 정보는 전송되지 않습니다.)</span></label>
+        <button class="button button-dark submit-button" type="submit">문의 내용 확인</button>
+      </form>
+    </dialog>
+    <dialog class="modal modal-narrow" id="searchDialog" aria-labelledby="searchTitle">
+      <form class="modal-card" id="siteSearchForm" method="dialog"><div class="modal-heading"><div><p class="eyebrow">SEARCH</p><h2 id="searchTitle">홈페이지 검색</h2></div><button class="close-button" type="button" data-close-dialog aria-label="닫기">닫기</button></div><label class="field-label" for="siteSearchInput">검색어</label><input class="field-input" id="siteSearchInput" type="search" placeholder="진료, 의료진, 방문 안내" /><button class="button button-dark submit-button" type="submit">검색 결과 찾기</button></form>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
