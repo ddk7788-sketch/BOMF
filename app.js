@@ -228,57 +228,106 @@ document.querySelector("#siteSearchForm").addEventListener("submit", (event) => 
   }
 });
 
-const scrollScrubVideo = document.querySelector("[data-scroll-scrub]");
-if (scrollScrubVideo) {
-  const videoFrame = scrollScrubVideo.closest(".hero-video-slot");
-  const videoPlaceholder = videoFrame.querySelector(".hero-video-placeholder");
-  const videoMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
-  let videoFrameRequest = 0;
-  let targetVideoTime = 0;
-  let videoSeekPending = false;
+document.querySelectorAll("[data-scroll-frames]").forEach((frameCanvas) => {
+  const frameSlot = frameCanvas.closest(".hero-video-slot, .philosophy-video-slot");
+  const framePlaceholder = frameSlot.querySelector(".hero-video-placeholder");
+  const frameSection = frameCanvas.closest(".hero, .philosophy-feature");
+  const frameCount = Number(frameCanvas.dataset.frameCount) || 40;
+  const columns = Number(frameCanvas.dataset.frameColumns) || 6;
+  const frameWidth = Number(frameCanvas.dataset.frameWidth) || 512;
+  const frameHeight = Number(frameCanvas.dataset.frameHeight) || 432;
+  const fit = frameCanvas.dataset.frameFit || "cover";
+  const frameImage = new Image();
+  let currentFrame = -1;
+  let frameUpdateRequest = 0;
 
-  const syncVideoToScroll = () => {
-    videoFrameRequest = 0;
-    if (!Number.isFinite(scrollScrubVideo.duration) || scrollScrubVideo.duration <= 0) return;
+  const drawScrollFrame = () => {
+    frameUpdateRequest = 0;
+    if (!frameImage.complete || !frameImage.naturalWidth) return;
 
-    if (videoMotionPreference.matches) {
-      targetVideoTime = 0;
+    const bounds = frameSection.getBoundingClientRect();
+    const scrollRange = window.innerHeight + bounds.height;
+    const progress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / scrollRange));
+    const nextFrame = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? 0
+      : Math.min(frameCount - 1, Math.floor(progress * frameCount));
+
+    const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
+    const width = frameCanvas.clientWidth;
+    const height = frameCanvas.clientHeight;
+    if (!width || !height) return;
+    const canvasWidth = Math.round(width * pixelRatio);
+    const canvasHeight = Math.round(height * pixelRatio);
+    if (frameCanvas.width !== canvasWidth || frameCanvas.height !== canvasHeight) {
+      frameCanvas.width = canvasWidth;
+      frameCanvas.height = canvasHeight;
+      currentFrame = -1;
+    }
+    if (nextFrame === currentFrame) return;
+    currentFrame = nextFrame;
+
+    const sourceX = (nextFrame % columns) * frameWidth;
+    const sourceY = Math.floor(nextFrame / columns) * frameHeight;
+    const sourceRatio = frameWidth / frameHeight;
+    const targetRatio = width / height;
+    let cropX = 0;
+    let cropY = 0;
+    let cropWidth = frameWidth;
+    let cropHeight = frameHeight;
+    if (fit === "contain") {
+      const scale = Math.min(width / frameWidth, height / frameHeight);
+      const drawWidth = frameWidth * scale;
+      const drawHeight = frameHeight * scale;
+      const context = frameCanvas.getContext("2d", { alpha: false });
+      context.fillStyle = getComputedStyle(frameSlot).backgroundColor;
+      context.fillRect(0, 0, canvasWidth, canvasHeight);
+      context.drawImage(frameImage, sourceX, sourceY, frameWidth, frameHeight,
+        Math.round((width - drawWidth) / 2 * pixelRatio), Math.round((height - drawHeight) / 2 * pixelRatio),
+        Math.round(drawWidth * pixelRatio), Math.round(drawHeight * pixelRatio));
+      return;
+    }
+    if (sourceRatio > targetRatio) {
+      cropWidth = frameHeight * targetRatio;
+      cropX = (frameWidth - cropWidth) / 2;
     } else {
-      const section = scrollScrubVideo.closest(".hero");
-      const bounds = section.getBoundingClientRect();
-      const scrollRange = window.innerHeight + bounds.height;
-      const progress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / scrollRange));
-      targetVideoTime = Math.max(0, Math.min(scrollScrubVideo.duration - 0.05, scrollScrubVideo.duration * progress));
+      cropHeight = frameWidth / targetRatio;
+      cropY = (frameHeight - cropHeight) / 2;
     }
 
-    if (videoSeekPending || scrollScrubVideo.seeking) return;
-    if (Math.abs(scrollScrubVideo.currentTime - targetVideoTime) > 1 / 30) {
-      videoSeekPending = true;
-      scrollScrubVideo.currentTime = targetVideoTime;
-    }
+    const context = frameCanvas.getContext("2d", { alpha: false });
+    context.drawImage(frameImage, sourceX + cropX, sourceY + cropY, cropWidth, cropHeight, 0, 0, canvasWidth, canvasHeight);
   };
 
-  const requestVideoFrameSync = () => {
-    if (!videoFrameRequest) videoFrameRequest = window.requestAnimationFrame(syncVideoToScroll);
+  const requestFrameUpdate = () => {
+    if (!frameUpdateRequest) frameUpdateRequest = window.requestAnimationFrame(drawScrollFrame);
   };
 
-  scrollScrubVideo.addEventListener("loadedmetadata", requestVideoFrameSync);
-  scrollScrubVideo.addEventListener("loadeddata", () => {
-    videoFrame.classList.add("is-video-ready");
-    requestVideoFrameSync();
-  });
-  scrollScrubVideo.addEventListener("seeked", () => {
-    videoSeekPending = false;
-    if (Math.abs(scrollScrubVideo.currentTime - targetVideoTime) > 1 / 30) requestVideoFrameSync();
-  });
-  scrollScrubVideo.addEventListener("error", () => {
-    videoPlaceholder.textContent = "영상을 불러오지 못했습니다";
-  });
-  window.addEventListener("scroll", requestVideoFrameSync, { passive: true });
-  window.addEventListener("resize", requestVideoFrameSync, { passive: true });
-  videoMotionPreference.addEventListener("change", requestVideoFrameSync);
-  requestVideoFrameSync();
-}
+  frameImage.addEventListener("load", () => {
+    frameSlot.classList.add("is-video-ready");
+    requestFrameUpdate();
+  }, { once: true });
+  frameImage.addEventListener("error", () => {
+    if (framePlaceholder) framePlaceholder.textContent = "영상을 불러오지 못했습니다";
+  }, { once: true });
+  const loadFrameAtlas = () => {
+    if (frameImage.src) return;
+    frameImage.src = frameCanvas.dataset.scrollFrames;
+  };
+  if ("IntersectionObserver" in window) {
+    const atlasObserver = new IntersectionObserver(([entry], observer) => {
+      if (!entry.isIntersecting) return;
+      loadFrameAtlas();
+      observer.disconnect();
+    }, { rootMargin: "160px" });
+    atlasObserver.observe(frameSlot);
+  } else {
+    loadFrameAtlas();
+  }
+  window.addEventListener("scroll", requestFrameUpdate, { passive: true });
+  window.addEventListener("resize", requestFrameUpdate, { passive: true });
+  window.matchMedia("(prefers-reduced-motion: reduce)").addEventListener("change", requestFrameUpdate);
+  requestFrameUpdate();
+});
 
 const revealMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
 if (!revealMotionPreference.matches && "IntersectionObserver" in window) {
