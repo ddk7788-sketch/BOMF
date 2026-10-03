@@ -431,7 +431,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .hero { min-height: auto; padding-top: 43px; padding-bottom: 43px; grid-template-columns: 1fr; gap: 28px; }
   .hero h1 { font-size: clamp(31px, 8vw, 43px); }
   .hero-description { margin: 13px 0 18px; font-size: 15px; }
-  .hero-photo-slot { height: auto; min-height: 0; aspect-ratio: 4 / 3; }
+  .hero-photo-slot { order: -1; height: auto; min-height: 0; aspect-ratio: 4 / 3; }
   .hero-specialties { margin-bottom: 20px; }
   .philosophy-feature { padding-top: 65px; padding-bottom: 68px; grid-template-columns: 1fr; gap: 25px; }
   .philosophy-photo-slot { min-height: 0; aspect-ratio: 4 / 5; }
