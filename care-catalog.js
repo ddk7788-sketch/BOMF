@@ -5,6 +5,7 @@ const bomkkotCareCatalog = [
       ["디스크", "disc"], ["협착증", "spinal-stenosis"], ["오십견", "frozen-shoulder"],
       ["무릎·슬관절염", "knee-arthritis"], ["만성통증", "chronic-pain"],
       ["교통사고 후유증", "traffic-accident"], ["초음파 가이드 신경주사", "ultrasound-guided-nerve-injection"],
+      ["난치성 질환 상담", "refractory-conditions"],
     ],
   },
   {

@@ -46,6 +46,16 @@
 .care-detail-article > .care-detail-actions { margin-top: 25px; }
 .care-detail-footer { min-height: 70px; padding: 14px max(24px, calc((100vw - 1180px) / 2)); display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 .care-detail-footer a { color: var(--brand-deep); font-weight: 750; }
+.care-overview-content { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: clamp(34px, 5vw, 60px) 0 10px; }
+.care-overview-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.care-overview-category { min-width: 0; padding: 22px 20px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
+.care-overview-category h2 { margin: 0 0 13px; padding-bottom: 12px; border-bottom: 1px solid var(--line); color: var(--ink); font-size: 18px; line-height: 1.45; letter-spacing: -.025em; }
+.care-overview-links { margin: 0; padding: 0; display: grid; gap: 2px; list-style: none; }
+.care-overview-links a { min-height: 38px; padding: 8px 0; display: block; color: var(--muted); font-size: 14px; line-height: 1.55; text-decoration: none; text-underline-offset: 3px; }
+.care-overview-links a::before { margin-right: 8px; color: var(--brand); content: "·"; font-weight: 800; }
+.care-overview-links a:hover { color: var(--brand-deep); text-decoration: underline; }
+.care-overview-links a:focus-visible { border-radius: 3px; outline-offset: 2px; }
+.care-overview-note { margin: 24px 0 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
 @media (max-width: 1020px) { .care-site-header .treatment-mega-menu { top: 68px; } }
 @media (max-width: 700px) {
   .care-detail-hero { padding-inline: 20px; }
@@ -62,4 +72,10 @@
   .care-steps li p { grid-column: 2; }
   .care-detail-body h2.care-check-heading { font-size: 17px; }
   .care-detail-footer { padding: 14px 20px; align-items: flex-start; flex-direction: column; gap: 3px; }
+  .care-overview-content { width: calc(100% - 40px); padding-top: 28px; }
+  .care-overview-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; }
+  .care-overview-category { padding: 17px 14px 15px; }
+  .care-overview-category h2 { font-size: 16px; }
+  .care-overview-links a { min-height: 36px; font-size: 13px; }
 }
+@media (max-width: 420px) { .care-overview-grid { grid-template-columns: 1fr; } }

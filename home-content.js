@@ -22,7 +22,7 @@ function setPhotoPlaceholder(label, text) {
 
 const homePhotos = {
   landing: {
-    src: "assets/bomkkot-landing-background.jpg",
+    src: "assets/bomkkot-landing-background-retouched.jpg",
     fallbackSrc: "assets/bomkkot-landing-flower.png",
     flowerLayerSrc: "assets/bomkkot-landing-flower-layer.webp",
     alt: "따뜻한 빛을 받은 흰 꽃과 한방 재료, 차가 놓인 이미지",
@@ -42,10 +42,10 @@ const homePhotos = {
     caption: "봄꽃의 이야기를 담을 사진으로 교체해 주세요.",
   },
   director: {
-    src: "",
+    src: "사진/원장.png",
     alt: "봄꽃한의원 대표원장 프로필 사진",
     placeholder: "대표원장 사진 준비 중",
-    caption: "대표원장 프로필 사진으로 교체해 주세요.",
+    caption: "",
   },
   ...Object.fromEntries(clinicPhotoSources.map((src, index) => {
     const number = String(index + 1).padStart(2, "0");

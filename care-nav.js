@@ -1,5 +1,29 @@
 (() => {
   const categories = window.BomkkotCareCatalog || [];
+  const overviewHref = location.pathname.includes("/care/") ? "index.html" : "care/index.html";
+  const careOverview = document.querySelector("[data-care-overview]");
+  if (careOverview) {
+    careOverview.replaceChildren(...categories.map((category, index) => {
+      const section = document.createElement("section");
+      section.className = "care-overview-category";
+      const heading = document.createElement("h2");
+      heading.id = `care-category-${index + 1}`;
+      heading.textContent = category.title;
+      const list = document.createElement("ul");
+      list.className = "care-overview-links";
+      category.items.forEach(([label, slug]) => {
+        const item = document.createElement("li");
+        const link = document.createElement("a");
+        link.href = `${slug}.html`;
+        link.textContent = label;
+        item.append(link);
+        list.append(item);
+      });
+      section.append(heading, list);
+      return section;
+    }));
+  }
+
   const treatmentMenu = document.querySelector("#treatmentMenu");
   if (treatmentMenu) {
     treatmentMenu.replaceChildren(...categories.map((category) => {
@@ -7,7 +31,10 @@
       column.className = "treatment-menu-column";
       const heading = document.createElement("h2");
       heading.className = "treatment-menu-label";
-      heading.textContent = category.title;
+      const categoryLink = document.createElement("a");
+      categoryLink.href = overviewHref;
+      categoryLink.textContent = category.title;
+      heading.append(categoryLink);
       const list = document.createElement("ul");
       list.className = "treatment-menu-links";
       category.items.forEach(([label, slug]) => {
@@ -22,14 +49,30 @@
       column.append(heading, list);
       return column;
     }));
+    const overviewLink = document.createElement("a");
+    overviewLink.className = "treatment-menu-overview";
+    overviewLink.href = overviewHref;
+    overviewLink.textContent = "전체 진료 안내 보기 →";
+    treatmentMenu.append(overviewLink);
   }
 
   const groups = document.querySelector(".mobile-care-groups");
-  if (groups) groups.replaceChildren(...categories.map((category) => {
+  if (groups) {
+    const allCareLink = document.createElement("a");
+    allCareLink.className = "mobile-care-all-link";
+    allCareLink.href = overviewHref;
+    allCareLink.textContent = "전체 진료 안내 보기 →";
+    groups.replaceChildren(allCareLink, ...categories.map((category) => {
     const group = document.createElement("details");
     group.className = "mobile-care-group";
     const summary = document.createElement("summary");
-    summary.textContent = category.title;
+    const title = document.createElement("span");
+    title.textContent = category.title;
+    const overviewLink = document.createElement("a");
+    overviewLink.className = "mobile-care-overview-link";
+    overviewLink.href = overviewHref;
+    overviewLink.textContent = "전체 보기";
+    summary.append(title, overviewLink);
     const links = document.createElement("div");
     links.className = "mobile-care-links";
     category.items.forEach(([label, slug]) => {
@@ -44,7 +87,8 @@
     });
     group.append(summary, links);
     return group;
-  }));
+    }));
+  }
 
   const closeDropdowns = (except) => document.querySelectorAll(".dropdown-trigger").forEach((trigger) => {
     if (trigger === except) return;

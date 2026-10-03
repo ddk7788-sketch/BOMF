@@ -17,6 +17,52 @@ function closeDropdowns(except = null) {
 }
 
 const treatmentAreas = window.BomkkotCareCatalog || [];
+const careOverviewHref = "care/index.html";
+
+const orbitHero = document.querySelector(".landing-card");
+const orbitLayer = document.querySelector(".landing-orbit");
+if (orbitHero && orbitLayer) {
+  const connectorRays = [
+    [".landing-orbit-point-left", "right", 1, 13],
+    [".landing-orbit-point-right", "left", -1, -13],
+    [".landing-orbit-point-mid-left", "right", 1, -5],
+    [".landing-orbit-point-lower-left", "right", 1, -16],
+    [".landing-orbit-point-lower-right", "left", -1, 16],
+  ];
+  let connectorFrame = 0;
+  let orbitInView = false;
+  const updateOrbitConnectors = () => {
+    if (!orbitInView || document.hidden) return;
+    const heroRect = orbitHero.getBoundingClientRect();
+    const ringSize = parseFloat(getComputedStyle(orbitLayer, "::before").width);
+    const centerX = heroRect.left + heroRect.width / 2;
+    const centerY = heroRect.top + heroRect.height / 2;
+    const radius = ringSize / 2;
+    connectorRays.forEach(([selector, anchor, horizontal, degrees]) => {
+      const point = orbitLayer.querySelector(selector);
+      if (!point) return;
+      const rect = point.getBoundingClientRect();
+      const x = anchor === "right" ? rect.right : rect.left;
+      const y = rect.top + rect.height / 2;
+      const radians = degrees * Math.PI / 180;
+      const dx = horizontal * Math.cos(radians);
+      const dy = horizontal * Math.sin(radians);
+      const offsetX = x - centerX;
+      const offsetY = y - centerY;
+      const projection = offsetX * dx + offsetY * dy;
+      const discriminant = projection * projection - (offsetX * offsetX + offsetY * offsetY - radius * radius);
+      const entry = discriminant >= 0 ? -projection - Math.sqrt(discriminant) : 0;
+      const lineLength = Math.max(0, entry);
+      point.style.setProperty("--orbit-line-length", `${lineLength.toFixed(2)}px`);
+    });
+    connectorFrame = requestAnimationFrame(updateOrbitConnectors);
+  };
+  new IntersectionObserver(([entry]) => {
+    orbitInView = entry.isIntersecting;
+    cancelAnimationFrame(connectorFrame);
+    if (orbitInView) connectorFrame = requestAnimationFrame(updateOrbitConnectors);
+  }).observe(orbitHero);
+}
 
 const treatmentMenu = document.querySelector("#treatmentMenu");
 if (treatmentMenu) {
@@ -27,7 +73,10 @@ if (treatmentMenu) {
     column.className = "treatment-menu-column";
     const heading = document.createElement("h2");
     heading.className = "treatment-menu-label";
-    heading.textContent = category.title;
+    const categoryLink = document.createElement("a");
+    categoryLink.href = careOverviewHref;
+    categoryLink.textContent = category.title;
+    heading.append(categoryLink);
     const list = document.createElement("ul");
     list.className = "treatment-menu-links";
     category.items.forEach(([label, slug]) => {
@@ -41,6 +90,11 @@ if (treatmentMenu) {
     column.append(heading, list);
     return column;
   }));
+  const overviewLink = document.createElement("a");
+  overviewLink.className = "treatment-menu-overview";
+  overviewLink.href = careOverviewHref;
+  overviewLink.textContent = "전체 진료 안내 보기 →";
+  treatmentMenu.append(overviewLink);
 }
 
 const mobileMenu = document.querySelector("#mobileMenu");
@@ -58,7 +112,13 @@ if (mobileMenu) {
       const group = document.createElement("details");
       group.className = "mobile-care-group";
       const heading = document.createElement("summary");
-      heading.textContent = category.title;
+      const title = document.createElement("span");
+      title.textContent = category.title;
+      const overviewLink = document.createElement("a");
+      overviewLink.className = "mobile-care-overview-link";
+      overviewLink.href = careOverviewHref;
+      overviewLink.textContent = "전체 보기";
+      heading.append(title, overviewLink);
       const list = document.createElement("div");
       list.className = "mobile-care-links";
       category.items.forEach(([label, slug]) => {
@@ -70,6 +130,11 @@ if (mobileMenu) {
       group.append(heading, list);
       mobileMenu.insertBefore(group, doctorLink);
     });
+    const allCareLink = document.createElement("a");
+    allCareLink.className = "mobile-care-all-link";
+    allCareLink.href = careOverviewHref;
+    allCareLink.textContent = "전체 진료 안내 보기 →";
+    firstLink.after(allCareLink);
   }
 }
 

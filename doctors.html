@@ -8,7 +8,7 @@
     <title>의료진 소개 | 봄꽃한의원</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body class="care-page">
+  <body class="care-page doctors-page">
     <a class="skip-link" href="#main">본문으로 바로가기</a>
     <header class="site-header">
       <div class="header-inner">
@@ -19,11 +19,24 @@
     </header>
     <main id="main">
       <nav class="care-breadcrumb section-wrap" aria-label="현재 위치"><a href="index.html#top">홈</a><span aria-hidden="true">/</span><span aria-current="page">의료진</span></nav>
-      <section class="care-hero section-wrap" aria-labelledby="teamTitle">
-        <div class="care-hero-copy"><p class="eyebrow"><span class="eyebrow-rule"></span> BOMKKOT · MEDICAL TEAM</p><h1 id="teamTitle">다른 의료진을 소개합니다</h1><p class="care-lead">봄꽃한의원의 의료진 정보를 확인하실 수 있습니다.</p><p class="care-hero-note">이름과 담당 분야, 약력은 확인된 정보만 담습니다. 프로필이 등록되면 이 페이지에서 보실 수 있습니다.</p><a class="button button-outline" href="index.html#doctors">대표원장 프로필 보기                                  </a></div>
-        <aside class="care-aside team-empty"><span>OUR MEDICAL TEAM</span><strong>의료진 프로필을<br />준비하고 있습니다.</strong><p>확인된 프로필을 준비하고 있습니다. 등록이 끝나면 이곳에서 소개하겠습니다.</p></aside>
+      <section class="team-page section-wrap" aria-labelledby="teamTitle">
+        <header class="team-page-heading">
+          <p class="eyebrow"><span class="eyebrow-rule"></span> BOMKKOT · MEDICAL TEAM</p>
+          <h1 id="teamTitle">봄꽃한의원 의료진</h1>
+          <p>의료진의 사진과 학력·경력, 학회 활동을 소개합니다.</p>
+        </header>
+        <div class="team-carousel" data-team-carousel aria-roledescription="carousel" aria-label="의료진 프로필">
+          <div class="team-slides" data-team-slides aria-live="polite"></div>
+          <div class="team-controls">
+            <button class="team-arrow" type="button" data-team-prev aria-label="이전 의료진"><span aria-hidden="true">←</span></button>
+            <div class="team-pagination" data-team-pagination aria-label="의료진 선택"></div>
+            <button class="team-arrow" type="button" data-team-next aria-label="다음 의료진"><span aria-hidden="true">→</span></button>
+          </div>
+          <p class="team-position" data-team-position aria-live="polite"></p>
+        </div>
       </section>
     </main>
-    <footer class="site-footer"><div class="section-wrap"><a class="text-link" href="index.html#top">봄꽃한의원 홈으로 돌아가기                                  </a></div></footer>
+    <footer class="site-footer"><div class="section-wrap"><a class="text-link" href="index.html#top">봄꽃한의원 홈으로 돌아가기</a></div></footer>
+    <script src="doctors.js" defer></script>
   </body>
 </html>
