@@ -2,7 +2,15 @@
 // 예: src: "assets/bomkkot-clinic.jpg"처럼 assets 안의 이미지 경로를 입력하세요.
 // src를 빈 문자열로 두면 요청에 따라 회색 사진 대기 영역이 표시됩니다.
 // 한의원 내부 사진 경로를 01–10 순서대로 입력하세요. 비워 두면 회색 대기 영역을 유지합니다.
-const clinicPhotoSources = ["", "", "", "", "", "", "", "", "", ""];
+const clinicPhotoSources = [
+  "사진/KakaoTalk_20251210_090236233_04/KakaoTalk_20251210_090236233_04.jpg",
+  "사진/KakaoTalk_20251210_090236233_04/KakaoTalk_20251210_090236233_09.jpg",
+  "사진/KakaoTalk_20251210_090236233_04/KakaoTalk_20251210_090236233_10.jpg",
+  "사진/새 폴더/새 폴더/KakaoTalk_20261002_144509923_06.jpg",
+  "사진/clinic-gallery-05.png",
+  "사진/새 폴더/새 폴더/KakaoTalk_20261002_144509923_03.jpg",
+  "", "", "", "",
+];
 
 function setPhotoPlaceholder(label, text) {
   const icon = document.createElement("span");
@@ -53,6 +61,11 @@ const homePhotos = {
 Object.entries(homePhotos).forEach(([slot, photo]) => {
   const frame = document.querySelector(`[data-home-photo="${slot}"]`);
   if (!frame) return;
+
+  if (slot.startsWith("clinic-") && !photo.src.trim()) {
+    frame.remove();
+    return;
+  }
 
   const label = frame.querySelector("[data-home-photo-label]");
   const caption = frame.querySelector("[data-home-photo-caption]");

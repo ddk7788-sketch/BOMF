@@ -3,10 +3,10 @@
   if (!root) return;
 
   const types = {
-    taeyang: { name: "태양인", description: "새로운 방향을 먼저 떠올리고, 주도적으로 일을 이끄는 성향에 응답이 가까웠어요." },
-    taeeum: { name: "태음인", description: "차분하게 살피고, 익숙한 흐름을 꾸준히 이어가는 성향에 응답이 가까웠어요." },
-    soyang: { name: "소양인", description: "생각을 빠르게 행동으로 옮기고, 활발하게 변화를 맞는 성향에 응답이 가까웠어요." },
-    soeum: { name: "소음인", description: "세부를 꼼꼼히 살피고, 신중하게 준비한 뒤 움직이는 성향에 응답이 가까웠어요." },
+    taeyang: { name: "태양인", description: "새로운 방향을 먼저 찾고, 일을 주도하는 편이에요." },
+    taeeum: { name: "태음인", description: "차분히 살피고, 익숙한 일을 꾸준히 이어가는 편이에요." },
+    soyang: { name: "소양인", description: "생각한 일을 바로 시작하고, 새로운 변화를 즐기는 편이에요." },
+    soeum: { name: "소음인", description: "작은 부분까지 살핀 뒤, 신중하게 움직이는 편이에요." },
   };
   const questions = [
     { prompt: "새로운 일을 맡으면 나는 보통…", options: [

@@ -16,6 +16,63 @@ function closeDropdowns(except = null) {
   });
 }
 
+const treatmentAreas = window.BomkkotCareCatalog || [];
+
+const treatmentMenu = document.querySelector("#treatmentMenu");
+if (treatmentMenu) {
+  treatmentMenu.classList.add("treatment-mega-menu");
+  treatmentMenu.setAttribute("aria-label", "진료 분야");
+  treatmentMenu.replaceChildren(...treatmentAreas.map((category) => {
+    const column = document.createElement("section");
+    column.className = "treatment-menu-column";
+    const heading = document.createElement("h2");
+    heading.className = "treatment-menu-label";
+    heading.textContent = category.title;
+    const list = document.createElement("ul");
+    list.className = "treatment-menu-links";
+    category.items.forEach(([label, slug]) => {
+      const item = document.createElement("li");
+      const link = document.createElement("a");
+      link.href = `care/${slug}.html`;
+      link.textContent = label;
+      item.append(link);
+      list.append(item);
+    });
+    column.append(heading, list);
+    return column;
+  }));
+}
+
+const mobileMenu = document.querySelector("#mobileMenu");
+if (mobileMenu) {
+  const doctorLink = [...mobileMenu.children].find((item) => item.textContent.trim() === "의료진 소개");
+  const firstLink = [...mobileMenu.children].find((item) => item.textContent.trim() === "진료 분야");
+  if (doctorLink && firstLink) {
+    let item = firstLink;
+    while (item && item !== doctorLink) {
+      const next = item.nextElementSibling;
+      item.remove();
+      item = next;
+    }
+    treatmentAreas.forEach((category) => {
+      const group = document.createElement("details");
+      group.className = "mobile-care-group";
+      const heading = document.createElement("summary");
+      heading.textContent = category.title;
+      const list = document.createElement("div");
+      list.className = "mobile-care-links";
+      category.items.forEach(([label, slug]) => {
+        const link = document.createElement("a");
+        link.href = `care/${slug}.html`;
+        link.textContent = label;
+        list.append(link);
+      });
+      group.append(heading, list);
+      mobileMenu.insertBefore(group, doctorLink);
+    });
+  }
+}
+
 document.querySelectorAll(".dropdown-trigger").forEach((trigger) => {
   trigger.addEventListener("click", () => {
     const menu = document.getElementById(trigger.getAttribute("aria-controls"));
@@ -54,10 +111,11 @@ document.querySelectorAll("dialog").forEach((dialog) => {
 });
 
 const clinicPhotoDialog = document.querySelector("#clinicPhotoDialog");
-const clinicPhotoPreview = clinicPhotoDialog.querySelector("[data-clinic-photo-preview]");
-const clinicPhotoCaption = clinicPhotoDialog.querySelector("#clinicPhotoDialogCaption");
+const clinicPhotoPreview = clinicPhotoDialog?.querySelector("[data-clinic-photo-preview]");
+const clinicPhotoCaption = clinicPhotoDialog?.querySelector("#clinicPhotoDialogCaption");
 let clinicPhotoOpener = null;
 
+if (clinicPhotoDialog && clinicPhotoPreview && clinicPhotoCaption) {
 function openClinicPhoto(frame) {
   const pageScrollX = window.scrollX;
   const pageScrollY = window.scrollY;
@@ -96,6 +154,31 @@ clinicPhotoDialog.addEventListener("close", () => {
   clinicPhotoOpener?.focus({ preventScroll: true });
 });
 
+const clinicGallery = document.querySelector(".clinic-gallery-grid");
+if (clinicGallery) {
+  const photos = [...clinicGallery.querySelectorAll(":scope > .clinic-gallery-photo")];
+  if (photos.length > 1) {
+    const track = document.createElement("div");
+    track.className = "clinic-gallery-track";
+    const originalGroup = document.createElement("div");
+    originalGroup.className = "clinic-gallery-group";
+    const duplicateGroup = document.createElement("div");
+    duplicateGroup.className = "clinic-gallery-group clinic-gallery-group-duplicate";
+    duplicateGroup.setAttribute("aria-hidden", "true");
+    photos.forEach((photo) => {
+      originalGroup.append(photo);
+      const duplicate = photo.cloneNode(true);
+      duplicate.removeAttribute("data-home-photo");
+      duplicate.removeAttribute("role");
+      duplicate.removeAttribute("tabindex");
+      duplicate.querySelectorAll("[data-home-photo-label], [data-home-photo-caption]").forEach((node) => node.removeAttribute("data-home-photo-label"));
+      duplicateGroup.append(duplicate);
+    });
+    track.append(originalGroup, duplicateGroup);
+    clinicGallery.replaceChildren(track);
+  }
+}
+
 document.querySelectorAll(".clinic-gallery-photo").forEach((frame) => {
   frame.addEventListener("click", (event) => {
     event.preventDefault();
@@ -109,6 +192,7 @@ document.querySelectorAll(".clinic-gallery-photo").forEach((frame) => {
     }
   });
 });
+}
 
 const menuToggle = document.querySelector(".menu-toggle");
 menuToggle.addEventListener("click", () => {
@@ -143,3 +227,74 @@ document.querySelector("#siteSearchForm").addEventListener("submit", (event) => 
     showToast("일치하는 안내를 찾지 못했어요.");
   }
 });
+
+const scrollScrubVideo = document.querySelector("[data-scroll-scrub]");
+if (scrollScrubVideo) {
+  const videoFrame = scrollScrubVideo.closest(".hero-video-slot");
+  const videoPlaceholder = videoFrame.querySelector(".hero-video-placeholder");
+  const videoMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+  let videoFrameRequest = 0;
+  let targetVideoTime = 0;
+  let videoSeekPending = false;
+
+  const syncVideoToScroll = () => {
+    videoFrameRequest = 0;
+    if (!Number.isFinite(scrollScrubVideo.duration) || scrollScrubVideo.duration <= 0) return;
+
+    if (videoMotionPreference.matches) {
+      targetVideoTime = 0;
+    } else {
+      const section = scrollScrubVideo.closest(".hero");
+      const bounds = section.getBoundingClientRect();
+      const scrollRange = window.innerHeight + bounds.height;
+      const progress = Math.min(1, Math.max(0, (window.innerHeight - bounds.top) / scrollRange));
+      targetVideoTime = Math.max(0, Math.min(scrollScrubVideo.duration - 0.05, scrollScrubVideo.duration * progress));
+    }
+
+    if (videoSeekPending || scrollScrubVideo.seeking) return;
+    if (Math.abs(scrollScrubVideo.currentTime - targetVideoTime) > 1 / 30) {
+      videoSeekPending = true;
+      scrollScrubVideo.currentTime = targetVideoTime;
+    }
+  };
+
+  const requestVideoFrameSync = () => {
+    if (!videoFrameRequest) videoFrameRequest = window.requestAnimationFrame(syncVideoToScroll);
+  };
+
+  scrollScrubVideo.addEventListener("loadedmetadata", requestVideoFrameSync);
+  scrollScrubVideo.addEventListener("loadeddata", () => {
+    videoFrame.classList.add("is-video-ready");
+    requestVideoFrameSync();
+  });
+  scrollScrubVideo.addEventListener("seeked", () => {
+    videoSeekPending = false;
+    if (Math.abs(scrollScrubVideo.currentTime - targetVideoTime) > 1 / 30) requestVideoFrameSync();
+  });
+  scrollScrubVideo.addEventListener("error", () => {
+    videoPlaceholder.textContent = "영상을 불러오지 못했습니다";
+  });
+  window.addEventListener("scroll", requestVideoFrameSync, { passive: true });
+  window.addEventListener("resize", requestVideoFrameSync, { passive: true });
+  videoMotionPreference.addEventListener("change", requestVideoFrameSync);
+  requestVideoFrameSync();
+}
+
+const revealMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+if (!revealMotionPreference.matches && "IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.14, rootMargin: "0px 0px -4% 0px" });
+
+  document.querySelectorAll("main > section").forEach((section) => {
+    section.querySelectorAll("h1, h2, h3, p, summary, figcaption").forEach((element, index) => {
+      element.classList.add("scroll-reveal");
+      element.style.setProperty("--reveal-delay", `${Math.min(index * 55, 220)}ms`);
+      revealObserver.observe(element);
+    });
+  });
+}

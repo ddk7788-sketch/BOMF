@@ -1,0 +1,65 @@
+.care-detail-page { min-height: 100vh; background: var(--paper); }
+.care-site-header { position: sticky; top: 0; z-index: 40; }
+.care-site-header .treatment-mega-menu { top: 76px; }
+.care-site-header .treatment-menu-links a[aria-current="page"], .care-site-header .mobile-care-links a[aria-current="page"] { color: var(--brand-deep); font-weight: 750; background: var(--accent-soft); }
+.care-site-header .mobile-care-groups { display: contents; }
+.care-site-header .mobile-menu[hidden] { display: none; }
+.care-detail-main { width: 100%; margin: 0; padding: 0 0 82px; }
+.care-detail-hero { padding: 0 max(28px, calc((100vw - 1180px) / 2)); background: var(--brand-deep); color: var(--surface); }
+.care-detail-hero-inner { width: min(1180px, 100%); min-height: 375px; margin: 0 auto; padding: 0 0 56px; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
+.care-breadcrumb { min-height: 57px; margin-bottom: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px; color: rgb(245 239 228 / .72); font-size: 12px; }
+.care-breadcrumb a:hover { color: var(--brand); text-decoration: underline; text-underline-offset: 3px; }
+.care-detail-hero .eyebrow { margin: 0 0 12px; color: var(--brand); font-size: 12px; font-weight: 750; letter-spacing: .1em; }
+.care-detail-hero h1 { margin: 0; color: var(--surface); font-size: clamp(36px, 5vw, 56px); line-height: 1.2; letter-spacing: -.05em; }
+.care-detail-summary { max-width: 790px; margin: 17px 0 0; color: rgb(245 239 228 / .83); font-size: clamp(15px, 1.5vw, 18px); line-height: 1.85; }
+.care-detail-hero .care-detail-actions { margin-top: 24px; }
+.care-detail-hero .button-dark { border-color: var(--brand); background: var(--brand); color: var(--brand-deep); }
+.care-detail-hero .button-dark:hover { background: #e8c46d; }
+.care-detail-hero .care-back-link { color: var(--surface); }
+.care-detail-article { width: min(980px, calc(100% - 48px)); margin: 0 auto; padding: clamp(36px, 6vw, 72px) clamp(0px, 2.5vw, 24px) 0; }
+.care-detail-body h2 { position: relative; margin: 42px 0 14px; padding-left: 17px; color: var(--ink); font-size: clamp(21px, 2.5vw, 27px); line-height: 1.45; letter-spacing: -.035em; }
+.care-detail-body h2::before { position: absolute; inset: 2px auto 2px 0; width: 3px; background: var(--brand-deep); content: ""; }
+.care-detail-body h2:first-child { margin-top: 0; }
+.care-detail-body p, .care-detail-body li { color: #574c42; font-size: 15px; line-height: 1.95; }
+.care-detail-body p { margin: 12px 0 16px; }
+.care-detail-body strong { color: var(--brand-deep); font-weight: 750; }
+.care-detail-body ul:not(.care-check-list), .care-detail-body ol:not(.care-steps) { margin: 12px 0 22px; padding-left: 24px; }
+.care-detail-body li + li { margin-top: 7px; }
+.care-detail-body .care-callout { margin: 0 0 17px; padding: 16px 19px; border-radius: 4px; background: #dce8df; color: var(--brand-deep); font-weight: 650; }
+.care-steps { margin: 17px 0 25px; padding: 0; display: grid; gap: 12px; list-style: none; }
+.care-steps li { min-height: 86px; padding: 16px 20px; display: grid; grid-template-columns: 42px minmax(120px, 180px) 1fr; gap: 12px; align-items: center; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+.care-step-number { width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--brand-deep); color: var(--brand); font-size: 14px; font-weight: 800; }
+.care-steps li > div { display: contents; }
+.care-steps li strong { color: var(--ink); font-size: 14px; }
+.care-steps li p { margin: 0; color: var(--muted); font-size: 14px; }
+.care-detail-body h2.care-check-heading { margin: 34px 0 0; padding: 18px 20px 8px 44px; border: 1px solid #d4dfd4; border-bottom: 0; border-radius: 5px 5px 0 0; background: #dce8df; font-size: 18px; }
+.care-detail-body h2.care-check-heading::before { left: 20px; top: 21px; bottom: auto; width: 14px; height: 14px; border-radius: 50%; background: var(--brand-deep); }
+.care-detail-body ul.care-check-list { margin: 0 0 22px; padding: 5px 22px 18px 44px; border: 1px solid #d4dfd4; border-top: 0; border-radius: 0 0 5px 5px; background: #dce8df; list-style: none; }
+.care-detail-body ul.care-check-list li { position: relative; margin: 5px 0; color: var(--muted); font-size: 14px; }
+.care-detail-body ul.care-check-list li::before { position: absolute; left: -19px; color: #5a725c; content: "✓"; font-weight: 800; }
+.care-detail-notice { margin-top: 42px; padding: 20px 22px; border: 1px solid var(--line); border-left: 4px solid var(--brand); background: var(--surface); }
+.care-detail-notice strong { color: var(--brand-deep); font-size: 14px; }
+.care-detail-notice p { margin: 5px 0 0; color: var(--muted); font-size: 13px; line-height: 1.85; }
+.care-detail-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+.care-detail-actions .button { min-height: 48px; }
+.care-back-link { color: var(--brand-deep); font-size: 14px; font-weight: 700; text-underline-offset: 4px; }
+.care-detail-article > .care-detail-actions { margin-top: 25px; }
+.care-detail-footer { min-height: 70px; padding: 14px max(24px, calc((100vw - 1180px) / 2)); display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+.care-detail-footer a { color: var(--brand-deep); font-weight: 750; }
+@media (max-width: 1020px) { .care-site-header .treatment-mega-menu { top: 68px; } }
+@media (max-width: 700px) {
+  .care-detail-hero { padding-inline: 20px; }
+  .care-detail-hero-inner { min-height: 350px; padding-bottom: 40px; }
+  .care-breadcrumb { margin-bottom: 18px; }
+  .care-detail-hero h1 { font-size: clamp(33px, 9vw, 44px); }
+  .care-detail-summary { font-size: 15px; }
+  .care-detail-article { width: calc(100% - 40px); padding: 35px 0 0; }
+  .care-detail-body h2 { margin-top: 33px; font-size: 21px; }
+  .care-detail-body p, .care-detail-body li { font-size: 14px; }
+  .care-steps li { grid-template-columns: 38px 1fr; gap: 7px 12px; padding: 14px; }
+  .care-step-number { grid-row: span 2; }
+  .care-steps li > div { display: block; }
+  .care-steps li p { grid-column: 2; }
+  .care-detail-body h2.care-check-heading { font-size: 17px; }
+  .care-detail-footer { padding: 14px 20px; align-items: flex-start; flex-direction: column; gap: 3px; }
+}
