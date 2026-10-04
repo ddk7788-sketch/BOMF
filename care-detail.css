@@ -46,6 +46,7 @@
 .care-detail-article > .care-detail-actions { margin-top: 25px; }
 .care-detail-footer { min-height: 70px; padding: 14px max(24px, calc((100vw - 1180px) / 2)); display: flex; justify-content: space-between; align-items: center; gap: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
 .care-detail-footer a { color: var(--brand-deep); font-weight: 750; }
+.care-detail-policy-links { display: flex; flex-wrap: wrap; gap: 14px; }
 .care-overview-content { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: clamp(34px, 5vw, 60px) 0 10px; }
 .care-overview-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
 .care-overview-category { min-width: 0; padding: 22px 20px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }

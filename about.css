@@ -1,0 +1,52 @@
+.about-page { min-height: 100vh; background: var(--surface); }
+.about-heading { padding: 31px 0 34px; border-bottom: 1px solid var(--line); }
+.about-heading .section-wrap { width: min(1180px, calc(100% - 56px)); }
+.about-breadcrumb { margin-bottom: 18px; display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 11px; }
+.about-breadcrumb span[aria-hidden="true"] { color: #b5a78f; }
+.about-heading .eyebrow { margin-bottom: 8px; color: #856326; }
+.about-heading h1 { margin: 0; color: var(--brand-deep); font-size: clamp(34px, 5vw, 56px); line-height: 1.24; letter-spacing: -.05em; }
+.about-heading h1 span, .about-meaning h2 span { color: #785d2a; }
+.about-heading .section-wrap > p:last-child { margin: 14px 0 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+.about-meaning { padding: 76px 0 83px; background: var(--paper); }
+.about-meaning-inner { display: grid; grid-template-columns: .62fr 1fr; gap: clamp(32px, 7vw, 92px); align-items: start; }
+.about-meaning-inner > .eyebrow { margin-top: 11px; color: #856326; }
+.about-meaning h2 { margin: 0; color: var(--brand-deep); font-size: clamp(30px, 4vw, 44px); line-height: 1.35; letter-spacing: -.045em; }
+.about-meaning-inner > div > p { max-width: 670px; margin: 19px 0 0; color: var(--muted); font-size: 16px; line-height: 1.9; }
+.about-promises { padding: 78px 0 83px; }
+.about-section-heading { margin-bottom: 27px; }
+.about-section-heading .eyebrow { margin-bottom: 6px; color: #856326; }
+.about-section-heading h2 { margin: 0; color: var(--brand-deep); font-size: clamp(25px, 3vw, 32px); line-height: 1.4; letter-spacing: -.04em; }
+.about-promise-list { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); list-style: none; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.about-promise-list li { min-width: 0; padding: 24px 22px 27px 0; display: flex; gap: 15px; }
+.about-promise-list li + li { padding-left: 22px; border-left: 1px solid var(--line); }
+.about-promise-list li > span { padding-top: 3px; color: #9a7126; font-size: 12px; font-weight: 750; letter-spacing: .08em; }
+.about-promise-list h3 { margin: 0; color: var(--brand-deep); font-size: 18px; }
+.about-promise-list p { margin: 8px 0 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.about-note { margin: 17px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.about-next { padding: 39px 0; border-top: 1px solid var(--line); background: #f0e8da; }
+.about-next-inner { display: flex; justify-content: space-between; align-items: center; gap: 30px; }
+.about-next .eyebrow { margin-bottom: 6px; color: #856326; }
+.about-next h2 { margin: 0; color: var(--brand-deep); font-size: 22px; line-height: 1.4; }
+.about-next nav { display: flex; flex-wrap: wrap; gap: 10px 21px; }
+.about-next nav a { color: var(--brand-deep); font-size: 13px; font-weight: 700; text-decoration: none; }
+.about-next nav a span { color: #9a7126; }
+.about-next nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.about-next nav a:focus-visible, .about-breadcrumb a:focus-visible { outline: 3px solid rgb(224 178 74 / .7); outline-offset: 3px; }
+@media (max-width: 760px) {
+  .about-heading { padding: 24px 0 28px; }
+  .about-heading .section-wrap { width: calc(100% - 40px); }
+  .about-meaning { padding: 58px 0 63px; }
+  .about-meaning-inner { grid-template-columns: 1fr; gap: 15px; }
+  .about-meaning-inner > .eyebrow { margin: 0; }
+  .about-meaning h2 { font-size: clamp(29px, 7vw, 38px); }
+  .about-meaning-inner > div > p { margin-top: 14px; font-size: 15px; }
+  .about-promises { padding: 58px 0 64px; }
+  .about-promise-list { grid-template-columns: 1fr; }
+  .about-promise-list li { padding: 18px 4px; }
+  .about-promise-list li + li { padding-left: 4px; border-top: 1px solid var(--line); border-left: 0; }
+  .about-promise-list p { margin-top: 5px; }
+  .about-next { padding: 29px 0; }
+  .about-next-inner { align-items: flex-start; flex-direction: column; gap: 17px; }
+  .about-next h2 { font-size: 20px; }
+  .about-next nav { gap: 10px 16px; }
+}

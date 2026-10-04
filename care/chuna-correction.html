@@ -10,22 +10,23 @@
     <link rel="stylesheet" href="../care-detail.css" />
     <script src="../care-catalog.js" defer></script>
     <script src="../care-nav.js" defer></script>
+  <script src="../blog-confirm.js" defer></script>
   </head>
   <body class="care-detail-page">
     <a class="skip-link" href="#main">본문으로 바로가기</a>
     <header class="site-header care-site-header">
       <div class="header-inner">
         <a class="wordmark" href="../index.html#top" aria-label="봄꽃한의원 홈"><img src="../assets/bomkkot-wordmark.png" alt="봄꽃한의원" /></a>
-        <a class="clinic-hours" href="../index.html#visit"><span class="hours-mark" aria-hidden="true"></span><span><strong>방문 안내</strong><small>운영 정보 확인</small></span></a>
+        <a class="clinic-hours" href="../visit.html"><span class="hours-mark" aria-hidden="true"></span><span><strong>방문 안내</strong><small>운영 정보 확인</small></span></a>
         <nav class="main-nav" aria-label="주 메뉴">
           <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="treatmentMenu">진료 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu treatment-mega-menu" id="treatmentMenu" aria-label="진료 분야" hidden></div></div>
-          <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="doctorMenu">의료진 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu" id="doctorMenu" hidden><a href="../doctors.html">의료진 소개</a><a href="../index.html#promise">진료 원칙</a></div></div>
-          <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="guideMenu">안내 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu" id="guideMenu" hidden><a href="../index.html#visit">진료시간·오시는 길</a><a href="../index.html#faq">자주 묻는 질문</a></div></div>
-          <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="storyMenu">봄꽃 이야기 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu" id="storyMenu" hidden><a href="../index.html#story">병원 소개</a><a href="../index.html#notice">소식과 안내</a></div></div>
+
+          <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="guideMenu">안내 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu" id="guideMenu" hidden><a href="../visit.html">진료시간·오시는 길</a><a href="../fees.html">진료비용</a><a href="../faq.html">자주 묻는 질문</a></div></div>
+          <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="storyMenu">봄꽃 이야기 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu" id="storyMenu" hidden><a href="../about.html">병원 소개</a><a href="../doctors.html">의료진 소개</a><a href="https://blog.naver.com/bom-kkot" target="_blank" rel="noopener noreferrer" data-blog-confirm aria-haspopup="dialog">소식과 안내</a></div></div>
         </nav>
         <div class="header-actions"><a class="button button-outline header-quiz" href="../index.html#constitution-quiz">체질 테스트</a><a class="button button-dark" href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">진료 예약</a><button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">메뉴</button></div>
       </div>
-      <div class="mobile-menu" id="mobileMenu" hidden><a href="../index.html#services">진료 분야</a><div class="mobile-care-groups"></div><a href="../doctors.html">의료진 소개</a><a href="../index.html#visit">이용 안내</a><a href="../index.html#story">봄꽃 이야기</a><a href="../index.html#constitution-quiz">체질 테스트</a><a href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">진료 예약</a></div>
+      <div class="mobile-menu" id="mobileMenu" hidden><a href="../index.html#services">진료 분야</a><div class="mobile-care-groups"></div><a href="../visit.html">이용 안내</a><a href="../fees.html">진료비용</a><a href="../faq.html">자주 묻는 질문</a><a href="../about.html">병원 소개</a><a href="../doctors.html">의료진 소개</a><a href="https://blog.naver.com/bom-kkot" target="_blank" rel="noopener noreferrer" data-blog-confirm aria-haspopup="dialog">소식과 안내</a><a href="../index.html#constitution-quiz">체질 테스트</a><a href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">진료 예약</a></div>
     </header>
     <main id="main" class="care-detail-main">
       <section class="care-detail-hero">
@@ -47,6 +48,6 @@
         <aside class="care-detail-notice"><strong>진료 안내</strong><p>추나 치료 적용 여부와 방법은 현재 상태, 병력, 진찰 결과에 따라 달라집니다. 통증이 심하거나 저림·근력 저하가 동반되면 먼저 의료진에게 알려 주세요.</p></aside>
       </section>
     </main>
-    <footer class="care-detail-footer"><a href="../index.html">봄꽃한의원</a><span>정확한 진료 범위와 운영 정보는 병원에 확인해 주세요.</span></footer>
+    <footer class="care-detail-footer"><a href="../index.html">봄꽃한의원</a><span>정확한 진료 범위와 운영 정보는 병원에 확인해 주세요.</span><nav class="care-detail-policy-links" aria-label="정책 안내"><a href="../privacy.html">개인정보 처리방침</a><a href="../terms.html">이용약관</a></nav></footer>
   </body>
 </html>

@@ -99,15 +99,18 @@ if (treatmentMenu) {
 
 const mobileMenu = document.querySelector("#mobileMenu");
 if (mobileMenu) {
-  const doctorLink = [...mobileMenu.children].find((item) => item.textContent.trim() === "의료진 소개");
   const firstLink = [...mobileMenu.children].find((item) => item.textContent.trim() === "진료 분야");
-  if (doctorLink && firstLink) {
-    let item = firstLink;
-    while (item && item !== doctorLink) {
-      const next = item.nextElementSibling;
-      item.remove();
-      item = next;
-    }
+  const guideLink = [...mobileMenu.children].find((item) => item.matches('a[href="visit.html"]'));
+  if (firstLink && guideLink) {
+    // Replace only the flat care links; keep the guide, fees, FAQ, and story links intact.
+    [...mobileMenu.children].forEach((item) => {
+      if (item === firstLink || item.classList.contains("mobile-care-all-link") || item.matches('a[href^="care/"]')) item.remove();
+    });
+    const allCareLink = document.createElement("a");
+    allCareLink.className = "mobile-care-all-link";
+    allCareLink.href = careOverviewHref;
+    allCareLink.textContent = "전체 진료 안내 보기 →";
+    mobileMenu.insertBefore(allCareLink, guideLink);
     treatmentAreas.forEach((category) => {
       const group = document.createElement("details");
       group.className = "mobile-care-group";
@@ -128,13 +131,8 @@ if (mobileMenu) {
         list.append(link);
       });
       group.append(heading, list);
-      mobileMenu.insertBefore(group, doctorLink);
+      mobileMenu.insertBefore(group, guideLink);
     });
-    const allCareLink = document.createElement("a");
-    allCareLink.className = "mobile-care-all-link";
-    allCareLink.href = careOverviewHref;
-    allCareLink.textContent = "전체 진료 안내 보기 →";
-    firstLink.after(allCareLink);
   }
 }
 
