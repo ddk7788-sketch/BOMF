@@ -1,6 +1,11 @@
 (() => {
   const categories = window.BomkkotCareCatalog || [];
   const overviewHref = location.pathname.includes("/care/") ? "index.html" : "care/index.html";
+  const careDetailPrefix = location.pathname.includes("/care/") ? "" : "care/";
+  const doctorProfileHref = location.pathname.includes("/care/") ? "../doctors.html" : "doctors.html";
+  document.querySelectorAll(".dropdown-menu a, .mobile-menu a").forEach((link) => {
+    if (link.textContent.trim() === "의료진 소개") link.href = doctorProfileHref;
+  });
   const careOverview = document.querySelector("[data-care-overview]");
   if (careOverview) {
     careOverview.replaceChildren(...categories.map((category, index) => {
@@ -14,7 +19,7 @@
       category.items.forEach(([label, slug]) => {
         const item = document.createElement("li");
         const link = document.createElement("a");
-        link.href = `${slug}.html`;
+        link.href = `${careDetailPrefix}${slug}.html`;
         link.textContent = label;
         item.append(link);
         list.append(item);
@@ -22,6 +27,28 @@
       section.append(heading, list);
       return section;
     }));
+  }
+
+  const categoryGrid = document.querySelector("[data-care-category]");
+  if (categoryGrid) {
+    const category = categories.find((item) => item.slug === categoryGrid.dataset.careCategory);
+    if (category) {
+      categoryGrid.replaceChildren(...category.items.map(([label, slug], index) => {
+        const link = document.createElement("a");
+        link.className = "care-category-card";
+        link.href = `${careDetailPrefix}${slug}.html`;
+        const number = document.createElement("span");
+        number.className = "care-category-number";
+        number.textContent = `진료 항목 · ${String(index + 1).padStart(2, "0")}`;
+        const title = document.createElement("h3");
+        title.textContent = label;
+        const more = document.createElement("span");
+        more.className = "care-category-more";
+        more.textContent = "세부 안내 보기 →";
+        link.append(number, title, more);
+        return link;
+      }));
+    }
   }
 
   const treatmentMenu = document.querySelector("#treatmentMenu");
@@ -32,7 +59,7 @@
       const heading = document.createElement("h2");
       heading.className = "treatment-menu-label";
       const categoryLink = document.createElement("a");
-      categoryLink.href = overviewHref;
+      categoryLink.href = `${careDetailPrefix}${category.slug}.html`;
       categoryLink.textContent = category.title;
       heading.append(categoryLink);
       const list = document.createElement("ul");
@@ -70,14 +97,14 @@
     title.textContent = category.title;
     const overviewLink = document.createElement("a");
     overviewLink.className = "mobile-care-overview-link";
-    overviewLink.href = overviewHref;
+    overviewLink.href = `${careDetailPrefix}${category.slug}.html`;
     overviewLink.textContent = "전체 보기";
     summary.append(title, overviewLink);
     const links = document.createElement("div");
     links.className = "mobile-care-links";
     category.items.forEach(([label, slug]) => {
       const link = document.createElement("a");
-      link.href = `${slug}.html`;
+      link.href = `${careDetailPrefix}${slug}.html`;
       link.textContent = label;
       if (location.pathname.endsWith(`/${slug}.html`)) {
         link.setAttribute("aria-current", "page");

@@ -20,7 +20,7 @@
     <header class="site-header">
       <div class="header-inner">
         <a class="wordmark" href="#top" aria-label="봄꽃한의원 홈"><img src="assets/bomkkot-wordmark.png" alt="봄꽃한의원" /></a>
-        <a class="clinic-hours" href="#visit"><span class="hours-mark" aria-hidden="true"></span><span><strong>방문 안내</strong><small>운영 정보 준비 중</small></span></a>
+        <a class="clinic-hours" href="#visit"><span class="hours-mark" aria-hidden="true"></span><span><strong>방문 안내</strong><small>월–금 08:00–18:00</small></span></a>
         <nav class="main-nav" aria-label="주 메뉴">
           <div class="nav-dropdown">
             <button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="treatmentMenu">진료 <span class="chevron" aria-hidden="true"></span></button>
@@ -28,7 +28,7 @@
           </div>
           <div class="nav-dropdown">
             <button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="careMenu">의료진 <span class="chevron" aria-hidden="true"></span></button>
-            <div class="dropdown-menu" id="careMenu" hidden><a href="#doctors">의료진 소개</a><a href="#promise">진료 원칙</a></div>
+            <div class="dropdown-menu" id="careMenu" hidden><a href="doctors.html">의료진 소개</a><a href="#promise">진료 원칙</a></div>
           </div>
           <div class="nav-dropdown">
             <button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="guideMenu">안내 <span class="chevron" aria-hidden="true"></span></button>
@@ -46,7 +46,7 @@
         <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">메뉴</button>
       </div>
       <div class="mobile-menu" id="mobileMenu" hidden>
-        <a href="#services">진료 분야</a><a class="mobile-care-all-link" href="care/index.html">전체 진료 안내 보기 →</a><a href="care/index.html">통증재활</a><a href="care/index.html">추나교정</a><a href="care/index.html">내과·신경·비뇨기과</a><a href="care/index.html">안이비인후과</a><a href="care/index.html">소아과</a><a href="care/index.html">부인과·정신과</a><a href="care/index.html">피부클리닉</a><a href="care/index.html">다이어트클리닉</a><a href="#doctors">의료진 소개</a><a href="#visit">이용 안내</a><a href="#story">봄꽃 이야기</a>
+        <a href="#services">진료 분야</a><a class="mobile-care-all-link" href="care/index.html">전체 진료 안내 보기 →</a><a href="care/pain-rehabilitation.html">통증재활</a><a href="care/chuna-correction.html">추나교정</a><a href="care/internal-neuro-urology.html">내과·신경·비뇨기과</a><a href="care/ent.html">안이비인후과</a><a href="care/pediatrics.html">소아과</a><a href="care/womens-mental-health.html">부인과·정신과</a><a href="care/skin-clinic.html">피부클리닉</a><a href="care/weight-management.html">다이어트클리닉</a><a href="doctors.html">의료진 소개</a><a href="#visit">이용 안내</a><a href="#story">봄꽃 이야기</a>
         <a href="#constitution-quiz">체질 테스트</a><button type="button" data-open-dialog="searchDialog">검색</button><a href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">진료 예약</a>
       </div>
     </header>
@@ -102,18 +102,25 @@
         <div class="promise-inner"><p>충분히 듣고</p><span aria-hidden="true"></span><p>쉽게 설명하고</p><span aria-hidden="true"></span><p>함께 계획합니다</p></div>
       </section>
 
-      <section class="services-section" id="services" aria-labelledby="servicesTitle">
+      <section class="care-preview-section" id="services" aria-labelledby="carePreviewTitle">
         <div class="section-wrap">
-          <div class="section-heading"><div><p class="eyebrow">CARE AT BOMKKOT</p><h2 id="servicesTitle">집중 진료 과목</h2><p class="section-intro">통증과 난치성 질환, 체중 관리, 피부, 난임 상담을 안내합니다.</p></div><a class="text-link" href="#visit">진료 문의하기                                  </a></div>
-          <div class="service-grid">
-            <a class="service-card" href="care/chronic-pain.html"><p class="service-type">01 · 집중 진료</p><span class="material-symbols-outlined service-icon" aria-hidden="true">accessibility_new</span><h3>통증</h3><p>오래 이어지는 통증과 일상에서 겪는 불편을 함께 살펴봅니다.</p></a>
-            <a class="service-card" href="care/refractory-conditions.html"><p class="service-type">02 · 집중 진료</p><span class="material-symbols-outlined service-icon" aria-hidden="true">medical_services</span><h3>난치</h3><p>기존 검사와 치료 이력을 바탕으로 상담 가능한 범위를 안내합니다.</p></a>
-            <a class="service-card" href="care/diet-capsule.html"><p class="service-type">03 · 집중 진료</p><span class="material-symbols-outlined service-icon" aria-hidden="true">monitor_weight</span><h3>다이어트</h3><p>건강 상태와 생활 습관을 확인하며 체중 관리 방향을 상담합니다.</p></a>
-            <article class="service-card"><p class="service-type">04 · 집중 진료</p><span class="material-symbols-outlined service-icon" aria-hidden="true">face_3</span><h3>피부</h3><p>피부 변화와 기존 관리 내용을 확인합니다.</p></article>
-            <a class="service-card" href="care/infertility.html"><p class="service-type">05 · 집중 진료</p><span class="material-symbols-outlined service-icon" aria-hidden="true">pregnant_woman</span><h3>난임</h3><p>임신 준비 과정과 기존 검사·치료 내용을 함께 살펴봅니다.</p></a>
+          <div class="care-preview-panel">
+            <div class="care-preview-copy">
+              <p class="eyebrow">BOMKKOT · SPECIAL CARE</p>
+              <h2 id="carePreviewTitle">통증부터 난임 상담까지<br /><span>대표 진료를 한눈에</span></h2>
+              <p>통증과 오래 이어지는 불편부터 체중·피부·난임 고민까지, 각 분야의 진료 내용을 한눈에 확인해 보세요.</p>
+              <a class="care-preview-link" href="care/index.html">전체 진료 분야 살펴보기 <span aria-hidden="true">→</span></a>
+            </div>
+            <nav class="care-preview-grid" aria-label="대표 진료 분야">
+              <a class="care-preview-tile" href="care/chronic-pain.html"><span class="material-symbols-outlined" aria-hidden="true">accessibility_new</span><strong>통증</strong></a>
+              <a class="care-preview-tile" href="care/refractory-conditions.html"><span class="material-symbols-outlined" aria-hidden="true">medical_services</span><strong>난치성 질환</strong></a>
+              <a class="care-preview-tile" href="care/diet-capsule.html"><span class="material-symbols-outlined" aria-hidden="true">monitor_weight</span><strong>체중 관리</strong></a>
+              <a class="care-preview-tile" href="care/skin-clinic.html"><span class="material-symbols-outlined" aria-hidden="true">face_3</span><strong>피부</strong></a>
+              <a class="care-preview-tile" href="care/infertility.html"><span class="material-symbols-outlined" aria-hidden="true">pregnant_woman</span><strong>난임</strong></a>
+            </nav>
           </div>
-          <aside class="other-care" aria-labelledby="otherCareTitle"><div><p class="eyebrow">OTHER CARE</p><h3 id="otherCareTitle">그 밖의 불편도 편하게 문의해 주세요</h3><p>대표 진료 분야 외의 불편도 병원의 진료 범위를 확인해 차분히 안내해 드립니다.</p></div><a class="button button-outline" href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">진료 문의하기                                  </a></aside>
-          <p class="medical-note">진료 분야별 자세한 내용은 병원 확인 후 확정해 주세요. 개인의 상태와 진료 결과는 다를 수 있으며, 구체적인 진료 방법과 비용은 의료진 상담을 통해 안내합니다.</p>
+          <aside class="other-care" aria-labelledby="otherCareTitle"><div><p class="eyebrow">OTHER CARE</p><h3 id="otherCareTitle">그 밖의 불편도 편하게 문의해 주세요</h3><p>대표 진료 분야 외의 불편도 병원의 진료 범위를 확인해 차분히 안내해 드립니다.</p></div><a class="button button-outline" href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">진료 문의하기</a></aside>
+          <p class="medical-note">개인의 상태와 진료 결과는 다를 수 있습니다. 구체적인 진료 방법과 비용은 의료진 상담을 통해 안내합니다.</p>
         </div>
       </section>
 
@@ -163,11 +170,11 @@
       <section class="process-section" id="process" aria-labelledby="processTitle">
         <div class="section-wrap"><div class="section-heading process-heading"><div><p class="eyebrow">YOUR FIRST VISIT</p><h2 id="processTitle">처음 오신 순간부터 <span>치료 이후까지</span></h2><p class="section-intro">첫 문의부터 진료 후 관리까지, 방문 절차를 미리 살펴보세요.</p></div></div>
           <ol class="journey-list">
-            <li class="journey-step"><span class="journey-number">01</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">call</span><h3>문의 · 예약</h3><p>전화나 예약 문의로 진료 가능 시간과 방문 방법을 확인합니다.</p></li>
-            <li class="journey-step"><span class="journey-number">02</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">forum</span><h3>상담 · 접수</h3><p>불편한 점과 생활 습관, 복용 중인 약 등을 확인합니다.</p></li>
-            <li class="journey-step"><span class="journey-number">03</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">stethoscope</span><h3>진료 · 설명</h3><p>현재 상태를 살펴 진료 방향과 예상 과정, 비용을 안내합니다.</p></li>
-            <li class="journey-step"><span class="journey-number">04</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">medication</span><h3>치료 · 관리</h3><p>동의한 진료 계획에 따라 진행하고 필요한 관리 내용을 안내합니다.</p></li>
-            <li class="journey-step"><span class="journey-number">05</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">monitor_heart</span><h3>이후 관리</h3><p>경과를 살피며 다음 진료나 생활 관리 방향을 함께 확인합니다.</p></li>
+            <li class="journey-step" tabindex="0"><span class="journey-number">01</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">call</span><h3>문의 · 예약</h3><p>전화나 예약 문의로 진료 가능 시간과 방문 방법을 확인합니다.</p></li>
+            <li class="journey-step" tabindex="0"><span class="journey-number">02</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">forum</span><h3>상담 · 접수</h3><p>불편한 점과 생활 습관, 복용 중인 약 등을 확인합니다.</p></li>
+            <li class="journey-step" tabindex="0"><span class="journey-number">03</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">stethoscope</span><h3>진료 · 설명</h3><p>현재 상태를 살펴 진료 방향과 예상 과정, 비용을 안내합니다.</p></li>
+            <li class="journey-step" tabindex="0"><span class="journey-number">04</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">medication</span><h3>치료 · 관리</h3><p>동의한 진료 계획에 따라 진행하고 필요한 관리 내용을 안내합니다.</p></li>
+            <li class="journey-step" tabindex="0"><span class="journey-number">05</span><span class="material-symbols-outlined journey-icon" aria-hidden="true">monitor_heart</span><h3>이후 관리</h3><p>경과를 살피며 다음 진료나 생활 관리 방향을 함께 확인합니다.</p></li>
           </ol>
           <p class="journey-note">진료 과정과 내용은 개인의 상태와 병원 운영 방식에 따라 달라질 수 있습니다.</p>
           <div class="journey-action"><a class="button button-dark" href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">                                                                                  첫 단계 시작하기</a></div>
@@ -196,9 +203,9 @@
       <section class="treatments-preview" id="all-treatments" aria-labelledby="treatmentsTitle">
         <div class="section-wrap treatments-layout">
           <div class="treatments-heading"><p class="eyebrow">CARE FOR EVERY DAY</p><h2 id="treatmentsTitle">온 가족의 건강을<br /><span>한 곳에서 살핍니다.</span></h2><p>통증재활부터 여성·소아·피부 건강까지, 상담할 수 있는 여덟 진료 분야를 살펴보세요.</p></div>
-          <div class="treatments-list-wrap"><p class="treatments-list-label">진료 분야 안내</p><div class="treatments-list">
-            <a href="care/index.html">통증재활</a><a href="care/index.html">추나교정</a><a href="care/index.html">내과·신경·비뇨기과</a><a href="care/index.html">안이비인후과</a><a href="care/index.html">소아과</a><a href="care/index.html">부인과·정신과</a><a href="care/index.html">피부클리닉</a><a href="care/index.html">다이어트클리닉</a>
-          </div><p class="treatments-footnote">개인의 상태와 병원의 실제 진료 범위에 따라 상담 내용이 달라질 수 있습니다.</p><a class="text-link" href="#visit">진료 문의 방법 보기                                  </a></div>
+          <div class="treatments-list-wrap"><p class="treatments-list-label">진료 분야 안내</p><div class="treatments-orbit"><div class="treatments-list">
+            <a href="care/pain-rehabilitation.html"><span class="treatments-orbit-label">통증재활</span></a><a href="care/chuna-correction.html"><span class="treatments-orbit-label">추나교정</span></a><a href="care/internal-neuro-urology.html"><span class="treatments-orbit-label"><span>내과·신경</span><span>비뇨기과</span></span></a><a href="care/ent.html"><span class="treatments-orbit-label"><span>안이비</span><span>인후과</span></span></a><a href="care/pediatrics.html"><span class="treatments-orbit-label">소아과</span></a><a href="care/womens-mental-health.html"><span class="treatments-orbit-label"><span>부인과</span><span>정신과</span></span></a><a href="care/skin-clinic.html"><span class="treatments-orbit-label"><span>피부</span><span>클리닉</span></span></a><a href="care/weight-management.html"><span class="treatments-orbit-label"><span>다이어트</span><span>클리닉</span></span></a>
+          </div><a class="treatments-center-link" href="care/index.html">전체 진료<br />확인하기</a></div><p class="treatments-footnote">개인의 상태와 병원의 실제 진료 범위에 따라 상담 내용이 달라질 수 있습니다.</p><a class="text-link" href="#visit">진료 문의 방법 보기                                  </a></div>
         </div>
       </section>
 
@@ -262,13 +269,13 @@
       </section>
 
       <section class="visit-section" id="visit" aria-labelledby="visitTitle">
-        <div class="section-wrap visit-inner"><div><p class="eyebrow">VISIT BOMKKOT</p><h2 id="visitTitle">방문 안내</h2><p class="section-intro">진료시간과 위치 등 정확한 방문 정보를 확인해 안내하겠습니다.</p></div><div class="visit-details"><div><span>진료시간</span><strong>안내 준비 중</strong></div><div><span>주소</span><strong>안내 준비 중</strong></div><div><span>대표 전화</span><strong>안내 준비 중</strong></div><a class="button button-dark" href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">방문 문의하기                                  </a></div></div>
+        <div class="section-wrap visit-inner"><div><p class="eyebrow">VISIT BOMKKOT</p><h2 id="visitTitle">방문 안내</h2><p class="section-intro">진료시간과 위치를 확인하고 편하게 문의하실 수 있습니다.</p></div><div class="visit-details"><div><span>진료시간</span><strong>월–금 오전 8시–오후 6시<br />토·일·공휴일 오전 8시–오후 2시</strong></div><div><span>주소</span><strong>충남 공주시 용당길 5<br />신흥빌딩 1층 봄꽃한의원</strong></div><div><span>대표 전화</span><a href="tel:+82418587575">041-858-7575</a></div><div><span>네이버 블로그</span><a href="https://blog.naver.com/bom-kkot" target="_blank" rel="noopener noreferrer">봄꽃한의원 블로그 <span aria-hidden="true">↗</span></a></div><a class="button button-dark" href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">방문 문의하기                                  </a></div></div>
       </section>
 
       <section class="notice-bar" id="notice"><div class="section-wrap notice-inner"><p><strong>진료 안내</strong><span>의료 정보는 일반적인 안내이며, 정확한 진단과 치료는 의료진과 상담해 주세요.</span></p><a href="#visit">병원 이용 안내                                  </a></div></section>
     </main>
 
-    <footer class="site-footer"><div class="section-wrap footer-inner"><div><a class="wordmark footer-wordmark" href="#top"><img src="assets/bomkkot-wordmark.png" alt="봄꽃한의원" /></a><p>환자가 이해하고 선택할 수 있는 진료를 지향합니다.</p></div><div class="footer-info"><span>주소: 안내 준비 중</span><span>대표 전화: 안내 준비 중</span><span>진료시간: 안내 준비 중</span></div><div class="footer-links"><span>개인정보 처리방침 준비 중</span><span>이용약관 준비 중</span><a href="#top">맨 위로 ↑</a></div><small>© 봄꽃한의원. All rights reserved.</small></div></footer>
+    <footer class="site-footer"><div class="section-wrap footer-inner"><div><a class="wordmark footer-wordmark" href="#top"><img src="assets/bomkkot-wordmark.png" alt="봄꽃한의원" /></a><p>환자가 이해하고 선택할 수 있는 진료를 지향합니다.</p></div><div class="footer-info"><span>주소: 충남 공주시 용당길 5 신흥빌딩 1층 봄꽃한의원</span><span>대표 전화: <a href="tel:+82418587575">041-858-7575</a></span><span>진료시간: 월–금 오전 8시–오후 6시 · 토·일·공휴일 오전 8시–오후 2시</span></div><div class="footer-links"><span>개인정보 처리방침 준비 중</span><span>이용약관 준비 중</span><a href="https://blog.naver.com/bom-kkot" target="_blank" rel="noopener noreferrer">네이버 블로그</a><a href="#top">맨 위로 ↑</a></div><small>© 봄꽃한의원. All rights reserved.</small></div></footer>
 
     <a class="floating-appointment button button-dark" href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer" aria-label="네이버 예약하기 새 창에서 열기">
       <span class="material-symbols-outlined" aria-hidden="true">event_available</span><span class="floating-appointment-label">예약하기</span>

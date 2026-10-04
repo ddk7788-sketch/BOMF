@@ -74,7 +74,7 @@ if (treatmentMenu) {
     const heading = document.createElement("h2");
     heading.className = "treatment-menu-label";
     const categoryLink = document.createElement("a");
-    categoryLink.href = careOverviewHref;
+    categoryLink.href = `care/${category.slug}.html`;
     categoryLink.textContent = category.title;
     heading.append(categoryLink);
     const list = document.createElement("ul");
@@ -116,7 +116,7 @@ if (mobileMenu) {
       title.textContent = category.title;
       const overviewLink = document.createElement("a");
       overviewLink.className = "mobile-care-overview-link";
-      overviewLink.href = careOverviewHref;
+      overviewLink.href = `care/${category.slug}.html`;
       overviewLink.textContent = "전체 보기";
       heading.append(title, overviewLink);
       const list = document.createElement("div");
@@ -411,4 +411,15 @@ if (!revealMotionPreference.matches && "IntersectionObserver" in window) {
       revealObserver.observe(element);
     });
   });
+
+  const journeyList = document.querySelector(".journey-list");
+  if (journeyList) {
+    journeyList.classList.add("journey-motion-ready");
+    const journeyObserver = new IntersectionObserver(([entry], observer) => {
+      if (!entry.isIntersecting) return;
+      journeyList.classList.add("is-visible");
+      observer.disconnect();
+    }, { threshold: 0.18 });
+    journeyObserver.observe(journeyList);
+  }
 }

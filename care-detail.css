@@ -56,6 +56,19 @@
 .care-overview-links a:hover { color: var(--brand-deep); text-decoration: underline; }
 .care-overview-links a:focus-visible { border-radius: 3px; outline-offset: 2px; }
 .care-overview-note { margin: 24px 0 0; color: var(--muted); font-size: 14px; line-height: 1.8; }
+.care-category-content { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: clamp(42px, 6vw, 70px) 0 12px; }
+.care-category-heading { max-width: 760px; margin-bottom: 27px; }
+.care-category-heading .eyebrow { margin: 0 0 8px; color: #806635; font-size: 11px; font-weight: 750; letter-spacing: .1em; }
+.care-category-heading h2 { margin: 0; color: var(--ink); font-size: clamp(26px, 3vw, 34px); line-height: 1.4; letter-spacing: -.04em; }
+.care-category-heading > p:last-child { margin: 11px 0 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+.care-category-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.care-category-card { min-height: 160px; padding: 21px 22px 18px; display: flex; flex-direction: column; align-items: flex-start; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--ink); text-decoration: none; transition: border-color .16s ease, background-color .16s ease, transform .16s ease; }
+.care-category-card:hover { transform: translateY(-2px); border-color: #bcae98; background: var(--accent-soft); }
+.care-category-card:focus-visible { outline: 3px solid var(--brand-deep); outline-offset: 3px; }
+.care-category-number { color: #806635; font-size: 11px; font-weight: 750; letter-spacing: .04em; }
+.care-category-card h3 { margin: 13px 0 0; font-size: 19px; line-height: 1.4; }
+.care-category-more { margin-top: auto; padding-top: 17px; color: var(--muted); font-size: 13px; font-weight: 600; }
+.care-category-content .care-detail-notice { margin-top: 26px; }
 @media (max-width: 1020px) { .care-site-header .treatment-mega-menu { top: 68px; } }
 @media (max-width: 700px) {
   .care-detail-hero { padding-inline: 20px; }
@@ -77,5 +90,13 @@
   .care-overview-category { padding: 17px 14px 15px; }
   .care-overview-category h2 { font-size: 16px; }
   .care-overview-links a { min-height: 36px; font-size: 13px; }
+  .care-category-content { width: calc(100% - 40px); padding-top: 34px; }
+  .care-category-heading { margin-bottom: 20px; }
+  .care-category-heading h2 { font-size: 25px; }
+  .care-category-heading > p:last-child { font-size: 14px; }
+  .care-category-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .care-category-card { min-height: 145px; padding: 16px 15px 15px; }
+  .care-category-card h3 { margin-top: 10px; font-size: 16px; }
+  .care-category-more { font-size: 12px; }
 }
-@media (max-width: 420px) { .care-overview-grid { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .care-overview-grid, .care-category-grid { grid-template-columns: 1fr; } }

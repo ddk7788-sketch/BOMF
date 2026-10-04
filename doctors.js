@@ -49,8 +49,15 @@ const medicalTeam = [
 const slidesRoot = document.querySelector("[data-team-slides]");
 const pagination = document.querySelector("[data-team-pagination]");
 const position = document.querySelector("[data-team-position]");
-if (slidesRoot && pagination && position) {
+const carousel = document.querySelector("[data-team-carousel]");
+const rotationToggle = document.querySelector("[data-team-toggle-rotation]");
+if (slidesRoot && pagination && position && carousel) {
   let activeIndex = 0;
+  let rotationEnabled = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let pointerInside = false;
+  let focusInside = false;
+  let carouselInView = true;
+  let rotationTimer = 0;
   const escapeHTML = (value) => value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
 
   slidesRoot.innerHTML = medicalTeam.map((doctor, index) => `
@@ -86,15 +93,54 @@ if (slidesRoot && pagination && position) {
     position.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(medicalTeam.length).padStart(2, "0")}`;
   }
 
+  function updateRotation() {
+    window.clearInterval(rotationTimer);
+    rotationTimer = 0;
+    const isRotating = rotationEnabled && !pointerInside && !focusInside && !document.hidden && carouselInView && medicalTeam.length > 1;
+    if (rotationToggle) {
+      rotationToggle.setAttribute("aria-pressed", String(rotationEnabled));
+      rotationToggle.setAttribute("aria-label", rotationEnabled ? "자동 프로필 넘김 멈추기" : "자동 프로필 넘김 재생");
+      rotationToggle.title = rotationEnabled ? "자동 프로필 넘김 멈추기" : "자동 프로필 넘김 재생";
+      rotationToggle.querySelector("span").textContent = rotationEnabled ? "Ⅱ" : "▶";
+    }
+    if (isRotating) rotationTimer = window.setInterval(() => showSlide(activeIndex + 1), 6000);
+  }
+
   document.querySelector("[data-team-prev]")?.addEventListener("click", () => showSlide(activeIndex - 1));
   document.querySelector("[data-team-next]")?.addEventListener("click", () => showSlide(activeIndex + 1));
+  rotationToggle?.addEventListener("click", () => {
+    rotationEnabled = !rotationEnabled;
+    updateRotation();
+  });
   pagination.addEventListener("click", (event) => {
     const button = event.target.closest("[data-team-go]");
     if (button) showSlide(Number(button.dataset.teamGo));
   });
-  document.querySelector("[data-team-carousel]")?.addEventListener("keydown", (event) => {
+  carousel.addEventListener("keydown", (event) => {
     if (event.key === "ArrowLeft") { event.preventDefault(); showSlide(activeIndex - 1); }
     if (event.key === "ArrowRight") { event.preventDefault(); showSlide(activeIndex + 1); }
   });
+  carousel.addEventListener("pointerenter", () => { pointerInside = true; updateRotation(); });
+  carousel.addEventListener("pointerleave", () => { pointerInside = false; updateRotation(); });
+  carousel.addEventListener("focusin", () => { focusInside = true; updateRotation(); });
+  carousel.addEventListener("focusout", () => {
+    window.requestAnimationFrame(() => {
+      focusInside = carousel.contains(document.activeElement);
+      updateRotation();
+    });
+  });
+  document.addEventListener("visibilitychange", updateRotation);
+  const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+  motionPreference.addEventListener?.("change", (event) => {
+    if (event.matches) rotationEnabled = false;
+    updateRotation();
+  });
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(([entry]) => {
+      carouselInView = entry.isIntersecting;
+      updateRotation();
+    }).observe(carousel);
+  }
   showSlide(0);
+  updateRotation();
 }

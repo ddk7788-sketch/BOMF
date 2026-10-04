@@ -39,7 +39,7 @@ const bomkkotCareCatalog = [
     ],
   },
   {
-    title: "피부클리닉", slug: "dermatology", items: [
+    title: "피부클리닉", slug: "skin-clinic", items: [
       ["점", "moles"], ["잡티", "blemishes"], ["흉터", "scars"], ["미백·피부톤 관리", "skin-tone"], ["기미", "melasma"],
       ["여드름", "acne"], ["아토피피부염", "atopic-dermatitis"], ["리프팅", "lifting"], ["제모", "hair-removal"],
       ["스킨부스터", "skin-booster"], ["실리프팅·매선", "thread-lifting"],

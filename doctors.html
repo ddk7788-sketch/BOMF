@@ -7,15 +7,25 @@
     <meta name="description" content="봄꽃한의원 의료진 소개" />
     <title>의료진 소개 | 봄꽃한의원</title>
     <link rel="stylesheet" href="styles.css" />
+    <script src="care-catalog.js" defer></script>
+    <script src="care-nav.js" defer></script>
   </head>
   <body class="care-page doctors-page">
     <a class="skip-link" href="#main">본문으로 바로가기</a>
     <header class="site-header">
       <div class="header-inner">
         <a class="wordmark" href="index.html#top" aria-label="봄꽃한의원 홈"><img src="assets/bomkkot-wordmark.png" alt="봄꽃한의원" /></a>
-        <nav class="main-nav" aria-label="주 메뉴"><a class="nav-link" href="index.html#services">진료 안내</a><a class="nav-link" href="index.html#doctors" aria-current="page">의료진</a><a class="nav-link" href="index.html#visit">이용 안내</a></nav>
-        <a class="button button-dark appointment-button" href="index.html#visit">방문 안내</a>
+        <a class="clinic-hours" href="index.html#visit"><span class="hours-mark" aria-hidden="true"></span><span><strong>방문 안내</strong><small>운영 정보 확인</small></span></a>
+        <nav class="main-nav" aria-label="주 메뉴">
+          <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="treatmentMenu">진료 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu treatment-mega-menu" id="treatmentMenu" aria-label="진료 분야" hidden></div></div>
+          <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="doctorMenu">의료진 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu" id="doctorMenu" hidden><a href="doctors.html" aria-current="page">의료진 소개</a><a href="index.html#promise">진료 원칙</a></div></div>
+          <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="guideMenu">안내 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu" id="guideMenu" hidden><a href="index.html#visit">진료시간·오시는 길</a><a href="index.html#faq">자주 묻는 질문</a></div></div>
+          <div class="nav-dropdown"><button class="nav-link dropdown-trigger" type="button" aria-expanded="false" aria-controls="storyMenu">봄꽃 이야기 <span class="chevron" aria-hidden="true"></span></button><div class="dropdown-menu" id="storyMenu" hidden><a href="index.html#story">병원 소개</a><a href="index.html#notice">소식과 안내</a></div></div>
+        </nav>
+        <div class="header-actions"><a class="button button-soft quiz-button" href="index.html#constitution-quiz">체질 테스트</a><a class="button button-dark appointment-button" href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">진료 예약</a></div>
+        <button class="menu-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobileMenu">메뉴</button>
       </div>
+      <div class="mobile-menu" id="mobileMenu" hidden><a href="care/index.html">진료 분야</a><div class="mobile-care-groups"></div><a href="doctors.html" aria-current="page">의료진 소개</a><a href="index.html#visit">이용 안내</a><a href="index.html#story">봄꽃 이야기</a><a href="index.html#constitution-quiz">체질 테스트</a><a href="https://booking.naver.com/booking/13/bizes/439953" target="_blank" rel="noopener noreferrer">진료 예약</a></div>
     </header>
     <main id="main">
       <nav class="care-breadcrumb section-wrap" aria-label="현재 위치"><a href="index.html#top">홈</a><span aria-hidden="true">/</span><span aria-current="page">의료진</span></nav>
@@ -26,13 +36,18 @@
           <p>의료진의 사진과 학력·경력, 학회 활동을 소개합니다.</p>
         </header>
         <div class="team-carousel" data-team-carousel aria-roledescription="carousel" aria-label="의료진 프로필">
-          <div class="team-slides" data-team-slides aria-live="polite"></div>
-          <div class="team-controls">
-            <button class="team-arrow" type="button" data-team-prev aria-label="이전 의료진"><span aria-hidden="true">←</span></button>
-            <div class="team-pagination" data-team-pagination aria-label="의료진 선택"></div>
-            <button class="team-arrow" type="button" data-team-next aria-label="다음 의료진"><span aria-hidden="true">→</span></button>
+          <div class="team-stage">
+            <div class="team-slides" data-team-slides></div>
+            <div class="team-arrow-controls">
+              <button class="team-arrow" type="button" data-team-prev aria-label="이전 의료진"><span aria-hidden="true">←</span></button>
+              <button class="team-arrow" type="button" data-team-next aria-label="다음 의료진"><span aria-hidden="true">→</span></button>
+            </div>
           </div>
-          <p class="team-position" data-team-position aria-live="polite"></p>
+          <div class="team-controls">
+            <div class="team-pagination" data-team-pagination aria-label="의료진 선택"></div>
+            <button class="team-rotation-toggle" type="button" data-team-toggle-rotation aria-pressed="false" aria-label="자동 프로필 넘김 멈추기" title="자동 프로필 넘김 멈추기"><span aria-hidden="true">Ⅱ</span></button>
+          </div>
+          <p class="team-position" data-team-position></p>
         </div>
       </section>
     </main>
