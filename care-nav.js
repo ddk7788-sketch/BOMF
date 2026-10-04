@@ -6,6 +6,12 @@
   document.querySelectorAll(".dropdown-menu a, .mobile-menu a").forEach((link) => {
     if (link.textContent.trim() === "의료진 소개") link.href = doctorProfileHref;
   });
+  const guideMenuLink = document.querySelector("#guideMenu > a");
+  const mobileGuideLink = document.querySelector('#mobileMenu > a[href$="visit.html"]');
+  const clinicHoursLabel = document.querySelector(".clinic-hours small");
+  if (guideMenuLink) guideMenuLink.textContent = "진료시간 및 오시는길";
+  if (mobileGuideLink) mobileGuideLink.textContent = "진료시간 및 오시는길";
+  if (clinicHoursLabel) clinicHoursLabel.textContent = "월–금 08:00–18:00";
   const careOverview = document.querySelector("[data-care-overview]");
   if (careOverview) {
     careOverview.replaceChildren(...categories.map((category, index) => {
@@ -85,36 +91,87 @@
 
   const groups = document.querySelector(".mobile-care-groups");
   if (groups) {
+    if (!document.querySelector('link[href*="Material+Symbols+Outlined"]')) {
+      const iconFont = document.createElement("link");
+      iconFont.rel = "stylesheet";
+      iconFont.href = "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,500,0,0";
+      document.head.append(iconFont);
+    }
+    const featuredSection = document.createElement("section");
+    featuredSection.className = "mobile-care-featured";
+    const featuredHeading = document.createElement("h2");
+    featuredHeading.className = "mobile-care-section-label";
+    featuredHeading.textContent = "대표 진료과목";
+    const featuredLinks = document.createElement("div");
+    featuredLinks.className = "mobile-care-featured-links";
+    (window.BomkkotFeaturedCare || []).forEach((item) => {
+      const link = document.createElement("a");
+      link.href = `${careDetailPrefix}${item.slug}.html`;
+      const icon = document.createElement("span");
+      icon.className = "material-symbols-outlined mobile-care-featured-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = item.icon;
+      const label = document.createElement("span");
+      label.textContent = item.title;
+      link.append(icon, label);
+      featuredLinks.append(link);
+    });
+    featuredSection.append(featuredHeading, featuredLinks);
+    groups.parentElement.insertBefore(featuredSection, groups);
+
     const allCareLink = document.createElement("a");
     allCareLink.className = "mobile-care-all-link";
     allCareLink.href = overviewHref;
     allCareLink.textContent = "전체 진료 안내 보기 →";
-    groups.replaceChildren(allCareLink, ...categories.map((category) => {
-    const group = document.createElement("details");
+    const allCareHeading = document.createElement("h2");
+    allCareHeading.className = "mobile-care-section-label mobile-care-all-heading";
+    allCareHeading.textContent = "전체 진료과목";
+    groups.replaceChildren(allCareHeading, ...categories.map((category) => {
+    const group = document.createElement("div");
     group.className = "mobile-care-group";
-    const summary = document.createElement("summary");
-    const title = document.createElement("span");
+    const heading = document.createElement("div");
+    heading.className = "mobile-care-group-heading";
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "mobile-care-toggle";
+    toggle.setAttribute("aria-controls", `mobile-care-panel-${category.slug}`);
+    toggle.setAttribute("aria-label", `세부 진료 항목 펼치기: ${category.title}`);
+    const title = document.createElement("a");
+    title.className = "mobile-care-title-link";
+    title.href = `${careDetailPrefix}${category.slug}.html`;
     title.textContent = category.title;
-    const overviewLink = document.createElement("a");
-    overviewLink.className = "mobile-care-overview-link";
-    overviewLink.href = `${careDetailPrefix}${category.slug}.html`;
-    overviewLink.textContent = "전체 보기";
-    summary.append(title, overviewLink);
+    heading.append(title, toggle);
+    const panel = document.createElement("div");
+    panel.className = "mobile-care-links-panel";
+    panel.id = `mobile-care-panel-${category.slug}`;
     const links = document.createElement("div");
     links.className = "mobile-care-links";
+    let isCurrentCategory = false;
     category.items.forEach(([label, slug]) => {
       const link = document.createElement("a");
       link.href = `${careDetailPrefix}${slug}.html`;
       link.textContent = label;
       if (location.pathname.endsWith(`/${slug}.html`)) {
         link.setAttribute("aria-current", "page");
-        group.open = true;
+        isCurrentCategory = true;
       }
       links.append(link);
     });
-    group.append(summary, links);
+    panel.append(links);
+    toggle.setAttribute("aria-expanded", String(isCurrentCategory));
+    panel.setAttribute("aria-hidden", String(!isCurrentCategory));
+    panel.inert = !isCurrentCategory;
+    group.classList.toggle("is-expanded", isCurrentCategory);
+    group.append(heading, panel);
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") !== "true";
+      toggle.setAttribute("aria-expanded", String(expanded));
+      panel.setAttribute("aria-hidden", String(!expanded));
+      panel.inert = !expanded;
+      group.classList.toggle("is-expanded", expanded);
+    });
     return group;
-    }));
+    }), allCareLink);
   }
 
   const closeDropdowns = (except) => document.querySelectorAll(".dropdown-trigger").forEach((trigger) => {
@@ -135,24 +192,65 @@
 
   const mobileMenu = document.querySelector("#mobileMenu");
   const toggle = document.querySelector(".menu-toggle");
+  let mobileMenuCloseTimer = 0;
+  let mobileMenuTransitionHandler = null;
+  let mobileMenuOpenFrame = 0;
+  const setMobileMenuOpen = (open) => {
+    if (!mobileMenu || !toggle) return;
+    window.cancelAnimationFrame(mobileMenuOpenFrame);
+    window.clearTimeout(mobileMenuCloseTimer);
+    if (mobileMenuTransitionHandler) {
+      mobileMenu.removeEventListener("transitionend", mobileMenuTransitionHandler);
+      mobileMenuTransitionHandler = null;
+    }
+    toggle.setAttribute("aria-expanded", String(open));
+    if (open) {
+      mobileMenu.hidden = false;
+      mobileMenu.classList.remove("is-open");
+      void mobileMenu.offsetHeight;
+      mobileMenuOpenFrame = requestAnimationFrame(() => {
+        mobileMenuOpenFrame = 0;
+        if (!mobileMenu.hidden && toggle.getAttribute("aria-expanded") === "true") mobileMenu.classList.add("is-open");
+      });
+      return;
+    }
+    if (mobileMenu.hidden) return;
+    mobileMenu.classList.remove("is-open");
+    const finishClose = () => {
+      mobileMenu.hidden = true;
+      mobileMenuTransitionHandler = null;
+    };
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      finishClose();
+      return;
+    }
+    mobileMenuTransitionHandler = (event) => {
+      if (event.target !== mobileMenu || event.propertyName !== "opacity") return;
+      window.clearTimeout(mobileMenuCloseTimer);
+      mobileMenu.removeEventListener("transitionend", mobileMenuTransitionHandler);
+      finishClose();
+    };
+    mobileMenu.addEventListener("transitionend", mobileMenuTransitionHandler);
+    mobileMenuCloseTimer = window.setTimeout(() => {
+      if (mobileMenuTransitionHandler) mobileMenu.removeEventListener("transitionend", mobileMenuTransitionHandler);
+      finishClose();
+    }, 260);
+  };
   toggle?.addEventListener("click", () => {
     const open = toggle.getAttribute("aria-expanded") !== "true";
-    toggle.setAttribute("aria-expanded", String(open));
-    mobileMenu.hidden = !open;
+    setMobileMenuOpen(open);
   });
   document.addEventListener("click", (event) => {
     if (!event.target.closest(".nav-dropdown")) closeDropdowns();
     if (event.target.closest(".mobile-menu a")) {
-      mobileMenu.hidden = true;
-      toggle?.setAttribute("aria-expanded", "false");
+      setMobileMenuOpen(false);
     }
   });
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
       closeDropdowns();
       if (mobileMenu && toggle) {
-        mobileMenu.hidden = true;
-        toggle.setAttribute("aria-expanded", "false");
+        setMobileMenuOpen(false);
         toggle.focus();
       }
     }

@@ -53,5 +53,16 @@ const bomkkotCareCatalog = [
   },
 ];
 
+const bomkkotFeaturedCare = [
+  { title: "통증", slug: "chronic-pain", icon: "accessibility_new" },
+  { title: "난치성 질환", slug: "refractory-conditions", icon: "medical_services" },
+  { title: "체중 관리", slug: "weight-management", icon: "monitor_weight" },
+  { title: "피부", slug: "skin-clinic", icon: "face_3" },
+  { title: "난임", slug: "infertility", icon: "pregnant_woman" },
+];
+
 if (typeof module !== "undefined" && module.exports) module.exports = bomkkotCareCatalog;
-if (typeof window !== "undefined") window.BomkkotCareCatalog = bomkkotCareCatalog;
+if (typeof window !== "undefined") {
+  window.BomkkotCareCatalog = bomkkotCareCatalog;
+  window.BomkkotFeaturedCare = bomkkotFeaturedCare;
+}

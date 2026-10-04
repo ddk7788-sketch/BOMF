@@ -33,7 +33,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .skip-link:focus { transform: translateY(0); }
 
 /* Header */
-.site-header { position: sticky; top: 0; z-index: 20; min-height: 76px; border-bottom: 1px solid var(--line); background: rgb(235 225 208 / .97); backdrop-filter: blur(12px); }
+.site-header { position: sticky; top: 0; z-index: 40; min-height: 76px; border-bottom: 1px solid var(--line); background: rgb(235 225 208 / .97); backdrop-filter: blur(12px); }
 .header-inner { width: min(1380px, calc(100% - 48px)); min-height: 76px; margin: 0 auto; display: flex; align-items: center; gap: clamp(12px, 1.6vw, 23px); }
 .wordmark { display: inline-flex; flex: 0 0 165px; align-items: center; }
 .wordmark img { display: block; width: 100%; height: auto; }
@@ -66,6 +66,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .treatment-menu-links a::before { content: ""; position: absolute; left: 2px; width: 3px; height: 3px; border-radius: 50%; background: var(--brand); }
 .treatment-menu-links a:hover { background: var(--accent-soft); color: var(--brand-deep); }
 .header-actions { flex: 0 0 auto; display: flex; align-items: center; gap: 10px; }
+.site-header .header-actions > a:first-of-type { border-color: transparent; background: var(--accent-soft); color: var(--brand-deep); }
 .button { min-height: 46px; padding: 0 17px; display: inline-flex; justify-content: center; align-items: center; gap: 8px; border: 1px solid transparent; border-radius: 5px; font-size: 12px; font-weight: 700; white-space: nowrap; cursor: pointer; transition: background-color .16s ease, color .16s ease, border-color .16s ease, transform .16s ease; }
 .button:hover { transform: translateY(-1px); }
 .button-dark { background: var(--brand-deep); color: var(--paper); }
@@ -498,6 +499,8 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .header-actions { gap: 7px; }
   .quiz-button { padding: 0 11px; font-size: 10px; }
   .appointment-button { padding: 0 12px; }
+  .site-header .header-actions > a:first-of-type { padding: 0 11px; font-size: 10px; }
+  .site-header .header-actions > a:last-of-type { padding: 0 12px; }
 }
 @media (max-width: 1020px) {
   .site-header, .header-inner { min-height: 68px; }
@@ -505,21 +508,40 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .director-details { grid-template-columns: 1fr; }
   .header-inner { width: calc(100% - 40px); }
   .wordmark { flex-basis: 150px; }
-  .clinic-hours, .main-nav, .header-actions { display: none; }
+  .clinic-hours { min-height: 38px; padding: 4px 9px; gap: 7px; border-radius: 10px; }
+  .main-nav { display: none; }
+  .header-inner { gap: 8px; }
+  .header-actions { display: contents; }
+  .header-actions > a { display: none; }
   .menu-toggle { min-height: 42px; margin-left: auto; padding: 0 4px 0 14px; display: inline-flex; justify-content: center; align-items: center; border: 0; background: transparent; color: var(--brand-deep); font-size: 12px; font-weight: 700; cursor: pointer; }
   .mobile-menu { position: absolute; top: 67px; left: 0; right: 0; z-index: 30; max-height: calc(100dvh - 68px); padding: 8px 22px 15px; overflow-y: auto; border-bottom: 1px solid var(--line); background: var(--paper); box-shadow: 0 12px 18px rgb(66 53 42 / .08); }
-  .mobile-menu:not([hidden]) { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; }
+  .mobile-menu:not([hidden]) { display: grid; grid-template-columns: 1fr 1fr; gap: 0 22px; opacity: 0; transform: translateY(-8px); transition: opacity 220ms ease, transform 220ms cubic-bezier(.22, 1, .36, 1); }
+  .mobile-menu:not([hidden]).is-open { opacity: 1; transform: translateY(0); }
+  .mobile-care-groups { display: contents; }
   .mobile-menu > a, .mobile-menu > button { min-height: 44px; display: flex; align-items: center; padding: 0; border: 0; border-bottom: 1px solid #e5dac8; background: transparent; color: var(--ink); text-align: left; font-size: 12px; }
+  .mobile-care-featured { grid-column: 1 / -1; padding: 4px 0 14px; border-bottom: 1px solid var(--line); }
+  .mobile-care-section-label { grid-column: 1 / -1; margin: 12px 0 7px; display: flex; align-items: center; gap: 7px; color: var(--brand-deep); font-size: 12px; font-weight: 750; }
+  .mobile-care-section-label::before { width: 6px; height: 6px; flex: 0 0 6px; border-radius: 50%; background: var(--brand); content: ""; }
+  .mobile-care-featured .mobile-care-section-label { margin: 2px 0 9px; }
+  .mobile-care-featured-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px 8px; }
+  .mobile-care-featured-links a { min-width: 0; min-height: 48px; padding: 7px 9px; display: grid; grid-template-columns: 28px minmax(0, 1fr); align-items: center; justify-content: start; gap: 8px; border: 1px solid rgb(216 204 184 / .8); border-radius: 9px; background: rgb(245 239 228 / .72); color: var(--brand-deep); font-size: 12px; font-weight: 700; line-height: 1.3; text-align: left; text-decoration: none; }
+  .mobile-care-featured-links a:active { background: var(--accent-soft); }
+  .mobile-care-featured-links a:focus-visible { outline-offset: 2px; }
+  .mobile-care-featured-icon { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 50%; background: var(--accent-soft); color: #8e6a27; font-size: 18px; line-height: 1; }
+  .mobile-care-featured-links a > span:last-child { min-width: 0; }
+  .mobile-care-all-heading { margin-top: 15px; }
   .mobile-care-group { grid-column: 1 / -1; border-bottom: 1px solid #e5dac8; }
-  .mobile-care-group summary { min-height: 44px; display: flex; align-items: center; justify-content: space-between; color: var(--brand-deep); font-size: 13px; font-weight: 700; list-style: none; cursor: pointer; }
-  .mobile-care-group summary > span { flex: 1; }
-  .mobile-care-overview-link { margin-right: 12px; color: var(--muted); font-size: 11px; font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
-  .mobile-care-all-link { min-height: 44px !important; margin: 4px 0; padding: 10px 12px !important; display: flex; align-items: center; justify-content: center; border-radius: 5px; background: var(--brand-deep); color: var(--surface) !important; font-weight: 700; text-decoration: none; }
-  .mobile-care-group summary::-webkit-details-marker { display: none; }
-  .mobile-care-group summary::after { content: ""; width: 7px; height: 7px; margin: -4px 4px 0 12px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg); transition: transform .16s ease; }
-  .mobile-care-group[open] summary::after { margin-top: 4px; transform: rotate(225deg); }
-  .mobile-care-links { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; padding: 0 0 8px; }
-  .mobile-care-links a { min-height: 40px; padding: 5px 8px; display: flex; align-items: center; color: var(--muted); font-size: 12px; line-height: 1.45; }
+  .mobile-care-group-heading { min-height: 44px; display: flex; align-items: center; }
+  .mobile-care-title-link { flex: 0 0 auto; color: var(--brand-deep); font-size: 13px; font-weight: 700; text-decoration: none; }
+  .mobile-care-toggle { min-width: 40px; min-height: 44px; flex: 1; padding: 0; display: flex; align-items: center; justify-content: flex-end; border: 0; background: transparent; color: var(--brand-deep); cursor: pointer; }
+  .mobile-menu .mobile-care-all-link { grid-column: 1 / -1; min-height: 44px; margin: 4px 0; padding: 10px 12px; display: flex; align-items: center; justify-content: center; border: 0; border-radius: 5px; background: var(--brand-deep); color: var(--surface); font-weight: 700; text-decoration: none; }
+  .mobile-care-toggle::after { content: ""; width: 7px; height: 7px; margin: -4px 8px 0 12px; flex: 0 0 7px; border-right: 1px solid currentColor; border-bottom: 1px solid currentColor; transform: rotate(45deg); transition: transform .16s ease; }
+  .mobile-care-group.is-expanded .mobile-care-toggle::after { margin-top: 4px; transform: rotate(225deg); }
+  .mobile-care-links-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 240ms cubic-bezier(.22, 1, .36, 1); }
+  .mobile-care-group.is-expanded .mobile-care-links-panel { grid-template-rows: 1fr; }
+  .mobile-care-links { min-height: 0; overflow: hidden; display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; padding: 0 0 8px; }
+  .mobile-care-links a { min-height: 40px; padding: 5px 8px; display: flex; align-items: center; color: var(--muted); font-size: 12px; line-height: 1.45; opacity: 0; transform: translateY(-3px); transition: opacity 160ms ease, transform 200ms ease; }
+  .mobile-care-group.is-expanded .mobile-care-links a { opacity: 1; transform: translateY(0); }
   .mobile-care-links a::before { content: "·"; margin-right: 7px; color: var(--brand); font-size: 17px; }
   .mobile-menu > button:last-child { color: var(--brand-deep); font-weight: 700; }
   .hero { min-height: 500px; grid-template-columns: minmax(0, 1fr) minmax(310px, .88fr); gap: 36px; padding-top: 54px; padding-bottom: 54px; }
@@ -655,7 +677,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 420px) {
   .section-wrap { width: calc(100% - 32px); }
   .header-inner { width: calc(100% - 32px); }
-  .wordmark { flex-basis: 136px; }
+  .wordmark { flex: 0 1 136px; min-width: 0; }
   .hero { padding-top: 37px; }
   .hero h1 { font-size: clamp(29px, 8.4vw, 35px); }
   .hero-actions { display: grid; grid-template-columns: 1fr 1fr; }
@@ -692,6 +714,12 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .journey-step:hover, .journey-step:focus-visible, .journey-motion-ready .journey-step:hover, .journey-motion-ready .journey-step:focus-visible { transform: none; }
   .treatments-list, .treatments-orbit-label { animation: none; }
 }
+@media (max-width: 360px) {
+  .wordmark { flex-basis: 108px; }
+  .clinic-hours { padding-inline: 8px; }
+  .clinic-hours small { display: none; }
+  .menu-toggle { padding-left: 4px; }
+}
 
 /* Header refinement: clearer navigation hierarchy and balanced visit actions */
 @media (min-width: 1021px) {
@@ -725,6 +753,10 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 }
 @media (prefers-reduced-motion: reduce) {
   .clinic-hours, .nav-link::after { transition: none; }
+}
+
+@media (max-width: 1020px) and (prefers-reduced-motion: reduce) {
+  .mobile-menu:not([hidden]), .mobile-care-links-panel, .mobile-care-links a, .mobile-care-toggle::after { transition: none; transform: none; }
 }
 
 /* Keep the desktop header elements grouped around the page center. */

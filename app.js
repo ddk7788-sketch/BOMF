@@ -98,6 +98,61 @@ if (treatmentMenu) {
 }
 
 const mobileMenu = document.querySelector("#mobileMenu");
+const menuToggle = document.querySelector(".menu-toggle");
+const guideMenuLink = document.querySelector("#guideMenu > a");
+const mobileGuideLink = mobileMenu?.querySelector('a[href$="visit.html"]');
+const clinicHoursLabel = document.querySelector(".clinic-hours small");
+if (guideMenuLink) guideMenuLink.textContent = "진료시간 및 오시는길";
+if (mobileGuideLink) mobileGuideLink.textContent = "진료시간 및 오시는길";
+if (clinicHoursLabel) clinicHoursLabel.textContent = "월–금 08:00–18:00";
+let mobileMenuCloseTimer = 0;
+let mobileMenuTransitionHandler = null;
+let mobileMenuOpenFrame = 0;
+
+function setMobileMenuOpen(open) {
+  if (!mobileMenu || !menuToggle) return;
+  window.cancelAnimationFrame(mobileMenuOpenFrame);
+  window.clearTimeout(mobileMenuCloseTimer);
+  if (mobileMenuTransitionHandler) {
+    mobileMenu.removeEventListener("transitionend", mobileMenuTransitionHandler);
+    mobileMenuTransitionHandler = null;
+  }
+  menuToggle.setAttribute("aria-expanded", String(open));
+
+  if (open) {
+    mobileMenu.hidden = false;
+    mobileMenu.classList.remove("is-open");
+    void mobileMenu.offsetHeight;
+    mobileMenuOpenFrame = requestAnimationFrame(() => {
+      mobileMenuOpenFrame = 0;
+      if (!mobileMenu.hidden && menuToggle.getAttribute("aria-expanded") === "true") mobileMenu.classList.add("is-open");
+    });
+    return;
+  }
+
+  if (mobileMenu.hidden) return;
+  mobileMenu.classList.remove("is-open");
+  const finishClose = () => {
+    mobileMenu.hidden = true;
+    mobileMenuTransitionHandler = null;
+  };
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    finishClose();
+    return;
+  }
+  mobileMenuTransitionHandler = (event) => {
+    if (event.target !== mobileMenu || event.propertyName !== "opacity") return;
+    window.clearTimeout(mobileMenuCloseTimer);
+    mobileMenu.removeEventListener("transitionend", mobileMenuTransitionHandler);
+    finishClose();
+  };
+  mobileMenu.addEventListener("transitionend", mobileMenuTransitionHandler);
+  mobileMenuCloseTimer = window.setTimeout(() => {
+    if (mobileMenuTransitionHandler) mobileMenu.removeEventListener("transitionend", mobileMenuTransitionHandler);
+    finishClose();
+  }, 260);
+}
+
 if (mobileMenu) {
   const firstLink = [...mobileMenu.children].find((item) => item.textContent.trim() === "진료 분야");
   const guideLink = [...mobileMenu.children].find((item) => item.matches('a[href="visit.html"]'));
@@ -110,18 +165,53 @@ if (mobileMenu) {
     allCareLink.className = "mobile-care-all-link";
     allCareLink.href = careOverviewHref;
     allCareLink.textContent = "전체 진료 안내 보기 →";
-    mobileMenu.insertBefore(allCareLink, guideLink);
+    const featuredSection = document.createElement("section");
+    featuredSection.className = "mobile-care-featured";
+    const featuredHeading = document.createElement("h2");
+    featuredHeading.className = "mobile-care-section-label";
+    featuredHeading.textContent = "대표 진료과목";
+    const featuredLinks = document.createElement("div");
+    featuredLinks.className = "mobile-care-featured-links";
+    (window.BomkkotFeaturedCare || []).forEach((item) => {
+      const link = document.createElement("a");
+      link.href = `care/${item.slug}.html`;
+      const icon = document.createElement("span");
+      icon.className = "material-symbols-outlined mobile-care-featured-icon";
+      icon.setAttribute("aria-hidden", "true");
+      icon.textContent = item.icon;
+      const label = document.createElement("span");
+      label.textContent = item.title;
+      link.append(icon, label);
+      featuredLinks.append(link);
+    });
+    featuredSection.append(featuredHeading, featuredLinks);
+    mobileMenu.insertBefore(featuredSection, guideLink);
+    const allCareHeading = document.createElement("h2");
+    allCareHeading.className = "mobile-care-section-label mobile-care-all-heading";
+    allCareHeading.textContent = "전체 진료과목";
+    mobileMenu.insertBefore(allCareHeading, guideLink);
     treatmentAreas.forEach((category) => {
-      const group = document.createElement("details");
+      const group = document.createElement("div");
       group.className = "mobile-care-group";
-      const heading = document.createElement("summary");
-      const title = document.createElement("span");
+      const heading = document.createElement("div");
+      heading.className = "mobile-care-group-heading";
+      const toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "mobile-care-toggle";
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-controls", `mobile-care-panel-${category.slug}`);
+      toggle.setAttribute("aria-label", `세부 진료 항목 펼치기: ${category.title}`);
+      const title = document.createElement("a");
+      title.className = "mobile-care-title-link";
+      title.href = `care/${category.slug}.html`;
       title.textContent = category.title;
-      const overviewLink = document.createElement("a");
-      overviewLink.className = "mobile-care-overview-link";
-      overviewLink.href = `care/${category.slug}.html`;
-      overviewLink.textContent = "전체 보기";
-      heading.append(title, overviewLink);
+      heading.append(title);
+      heading.append(toggle);
+      const panel = document.createElement("div");
+      panel.className = "mobile-care-links-panel";
+      panel.id = `mobile-care-panel-${category.slug}`;
+      panel.setAttribute("aria-hidden", "true");
+      panel.inert = true;
       const list = document.createElement("div");
       list.className = "mobile-care-links";
       category.items.forEach(([label, slug]) => {
@@ -130,9 +220,18 @@ if (mobileMenu) {
         link.textContent = label;
         list.append(link);
       });
-      group.append(heading, list);
+      panel.append(list);
+      group.append(heading, panel);
+      toggle.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") !== "true";
+        toggle.setAttribute("aria-expanded", String(expanded));
+        panel.setAttribute("aria-hidden", String(!expanded));
+        panel.inert = !expanded;
+        group.classList.toggle("is-expanded", expanded);
+      });
       mobileMenu.insertBefore(group, guideLink);
     });
+    mobileMenu.insertBefore(allCareLink, guideLink);
   }
 }
 
@@ -151,8 +250,7 @@ document.addEventListener("click", (event) => {
   const opener = event.target.closest("[data-open-dialog]");
   if (opener) {
     document.getElementById(opener.dataset.openDialog)?.showModal();
-    document.querySelector("#mobileMenu").hidden = true;
-    document.querySelector(".menu-toggle").setAttribute("aria-expanded", "false");
+    setMobileMenuOpen(false);
     closeDropdowns();
   }
   if (event.target.matches("[data-close-dialog]")) event.target.closest("dialog")?.close();
@@ -161,9 +259,7 @@ document.addEventListener("click", (event) => {
 document.querySelectorAll(".dropdown-menu a, .mobile-menu a").forEach((link) => {
   link.addEventListener("click", () => {
     closeDropdowns();
-    const menu = document.querySelector("#mobileMenu");
-    menu.hidden = true;
-    document.querySelector(".menu-toggle").setAttribute("aria-expanded", "false");
+    setMobileMenuOpen(false);
   });
 });
 
@@ -257,12 +353,9 @@ document.querySelectorAll(".clinic-gallery-photo").forEach((frame) => {
 });
 }
 
-const menuToggle = document.querySelector(".menu-toggle");
-menuToggle.addEventListener("click", () => {
-  const menu = document.querySelector("#mobileMenu");
-  const willOpen = menu.hidden;
-  menu.hidden = !willOpen;
-  menuToggle.setAttribute("aria-expanded", String(willOpen));
+menuToggle?.addEventListener("click", () => {
+  const willOpen = menuToggle.getAttribute("aria-expanded") !== "true";
+  setMobileMenuOpen(willOpen);
   closeDropdowns();
 });
 
