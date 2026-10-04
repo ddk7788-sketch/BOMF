@@ -104,7 +104,16 @@ const mobileGuideLink = mobileMenu?.querySelector('a[href$="visit.html"]');
 const clinicHoursLabel = document.querySelector(".clinic-hours small");
 if (guideMenuLink) guideMenuLink.textContent = "진료시간 및 오시는길";
 if (mobileGuideLink) mobileGuideLink.textContent = "진료시간 및 오시는길";
-if (clinicHoursLabel) clinicHoursLabel.textContent = "월–금 08:00–18:00";
+if (clinicHoursLabel) {
+  const updateClinicHoursLabel = () => {
+    const weekday = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "Asia/Seoul" }).format(new Date());
+    clinicHoursLabel.textContent = weekday === "Sat" || weekday === "Sun" ? "토·일 08:00–14:00" : "월–금 08:00–18:00";
+  };
+  updateClinicHoursLabel();
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) updateClinicHoursLabel();
+  });
+}
 let mobileMenuCloseTimer = 0;
 let mobileMenuTransitionHandler = null;
 let mobileMenuOpenFrame = 0;
