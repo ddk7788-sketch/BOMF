@@ -862,9 +862,9 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
 .care-pillar-group-heading > a:hover { color: #755a29; }
 .care-pillar-group-heading > a:focus-visible, .care-pillar-card a:focus-visible { outline: 3px solid #9b742c; outline-offset: 3px; }
 .care-pillar-photo-marquee { margin: 0 0 18px; overflow: hidden; border-radius: 13px; }
-.care-pillar-photo-track { width: 200%; display: flex; animation: care-photo-marquee 32s linear infinite; }
-.care-pillar-photo-set { box-sizing: border-box; flex: 0 0 50%; width: 50%; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding-right: 16px; }
-.care-pillar-photo-placeholder { min-width: 0; aspect-ratio: 5 / 3; display: grid; place-items: center; border: 1px solid #d0cec9; border-radius: 18px; background: #e3e1dc; color: #625f59; font-size: 16px; font-weight: 600; }
+.care-pillar-photo-track { width: 600%; display: flex; animation: care-photo-marquee 32s linear infinite; }
+.care-pillar-photo-set { box-sizing: border-box; flex: 0 0 16.666667%; width: 16.666667%; min-width: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding-right: 16px; }
+.care-pillar-photo-image { display: block; width: 100%; min-width: 0; aspect-ratio: 5 / 3; border: 1px solid #d0cec9; border-radius: 18px; background: #e3e1dc; object-fit: cover; object-position: center; }
 @keyframes care-photo-marquee { to { transform: translateX(-50%); } }
 .care-pillar-card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .care-pillar-card { min-width: 0; min-height: 290px; padding: 24px 25px; border: 1px solid rgb(216 204 184 / .78); border-radius: 13px; background: var(--surface); }
@@ -917,7 +917,7 @@ button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible
   .care-pillar-group-heading > a { min-height: 40px; font-size: 14px; }
   .care-pillar-photo-marquee { margin-bottom: 13px; border-radius: 10px; }
   .care-pillar-photo-set { gap: 9px; padding-right: 9px; }
-  .care-pillar-photo-placeholder { border-radius: 12px; font-size: 14px; }
+  .care-pillar-photo-image { border-radius: 12px; }
   .care-pillar-card-grid { grid-template-columns: 1fr; gap: 10px; }
   .care-pillar-card { min-height: 0; padding: 19px 17px; border-radius: 11px; }
   .care-pillar-card-heading > .material-symbols-outlined { width: 38px; height: 38px; flex-basis: 38px; font-size: 20px; }
